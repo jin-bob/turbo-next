@@ -1,28 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useTheme } from 'next-themes';
 import { Moon, Sun } from 'lucide-react';
 import { Button } from '@/src/components/ui/button';
-import { setThemeCookie } from '@/src/lib/actions/theme';
+import { useTheme } from '@/src/context/theme-context';
 
 export default function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
-
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMounted(true);
-  }, []);
-  if (!mounted) return null;
-
-  const toggleTheme = () => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
-
-    setTheme(newTheme);
-
-    setThemeCookie(newTheme);
-  };
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <Button variant="link" className="text-white" onClick={toggleTheme}>

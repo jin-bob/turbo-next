@@ -1,7 +1,7 @@
 import { type ReactNode } from 'react';
 import type { Metadata } from 'next';
 import { cookies } from 'next/headers';
-import AppThemeProvider from '@/src/components/providers/theme-provider';
+import { Theme, ThemeProvider } from '@/src/context/theme-context';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -18,16 +18,12 @@ export default async function RootLayout({
   children: ReactNode;
 }>) {
   const cookieStore = await cookies();
-  const theme = cookieStore.get('theme')?.value;
+  const theme = (cookieStore.get('theme')?.value || 'light') as Theme;
 
   return (
-    <html
-      lang="en"
-      className={theme === 'dark' ? 'dark' : 'light'}
-      suppressHydrationWarning
-    >
+    <html lang="en" className={theme}>
       <body>
-        <AppThemeProvider>{children}</AppThemeProvider>
+        <ThemeProvider theme={theme}>{children}</ThemeProvider>
       </body>
     </html>
   );
