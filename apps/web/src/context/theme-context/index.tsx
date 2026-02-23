@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, PropsWithChildren, useContext } from 'react';
-import { setThemeCookie } from '@/src/lib/actions/theme';
+import { setThemeCookie } from '@/src/actions/theme';
 
 export type Theme = 'dark' | 'light';
 

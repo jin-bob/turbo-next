@@ -2,6 +2,7 @@ import Link from 'next/link';
 import NavLinks from '@/src/components/global/nav/desktop-nav/nav-links';
 import Logo from '@/src/components/global/logo';
 import ThemeToggle from '@/src/components/global/theme-toggle';
+import LoginLink from '@/src/components/home/login-link';
 
 export default function DesktopNav() {
   return (
@@ -13,9 +14,7 @@ export default function DesktopNav() {
       <NavLinks />
 
       <div className="flex flex-row items-center justify-between gap-2">
-        <Link href="/login" className="text-white">
-          Login
-        </Link>
+        <LoginLink className="h-fit w-fit text-base" />
 
         <ThemeToggle />
       </div>
