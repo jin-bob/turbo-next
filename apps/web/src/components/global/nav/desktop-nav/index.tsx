@@ -5,7 +5,7 @@ import ThemeToggle from '@/src/components/global/theme-toggle';
 
 export default function DesktopNav() {
   return (
-    <nav className="sticky top-0 hidden w-full items-center gap-4 bg-blue-300 p-4 md:flex">
+    <nav className="bg-header sticky top-0 hidden w-full items-center gap-4 p-4 md:flex">
       <Link href="/apps/web/public">
         <Logo className="h-12 w-[144px] text-white" />
       </Link>

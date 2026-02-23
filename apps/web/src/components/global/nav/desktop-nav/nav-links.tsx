@@ -16,7 +16,9 @@ export default function NavLinks() {
           key={link.href}
           className={cn(
             'font-semibold',
-            pathName === link.href ? 'text-blue-500' : 'text-white',
+            pathName === link.href
+              ? 'font-semibold text-white'
+              : 'text-zinc-300 hover:text-white',
           )}
         >
           {link.text}
