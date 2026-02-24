@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
 import { redirect } from 'next/navigation';
 import { SidebarProvider, SidebarTrigger } from '@/src/components/ui/sidebar';
-import AppSidebar from '@/src/components/global/dashboard/app-sidebar/app-sidebar';
+import AppSidebar from '@/src/components/dashboard/app-sidebar/app-sidebar';
+import MobileNav from '@/src/components/dashboard/mobile-nav/mobile-nav';
 import { getUser } from '@/src/lib/firebase/get-user';
-import MobileNav from '@/src/components/global/dashboard/mobile-nav/mobile-nav';
 
 export default async function Layout({ children }: { children: ReactNode }) {
   const user = await getUser();
