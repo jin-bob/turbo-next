@@ -121,6 +121,10 @@
     --header: oklch(0.413 0.135 261.805);
 }
 
+@theme {
+    --breakpoint-mobsm: 440px;
+}
+
 @layer base {
     * {
         @apply border-border outline-ring/50;

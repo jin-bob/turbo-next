@@ -5,8 +5,8 @@ import {
   SidebarHeader,
 } from '@/src/components/ui/sidebar';
 import Logo from '@/src/components/global/logo';
-import NavMain from '@/src/components/global/dashboard/nav-main';
-import FooterMenu from '@/src/components/global/dashboard/footer-menu';
+import NavMain from '@/src/components/global/dashboard/app-sidebar/nav-main';
+import FooterMenu from '@/src/components/global/dashboard/app-sidebar/footer-menu';
 
 export default function AppSidebar() {
   return (

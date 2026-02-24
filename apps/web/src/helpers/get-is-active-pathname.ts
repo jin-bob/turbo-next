@@ -3,7 +3,10 @@ type GetIsActiveProps = {
   to: string;
 };
 
-export default function getIsActive({ pathName, to }: GetIsActiveProps) {
+export default function getIsActivePathname({
+  pathName,
+  to,
+}: GetIsActiveProps) {
   if (to === '/' && pathName === '/dashboard') return true;
 
   const endPath = pathName.split('/')?.[2];
