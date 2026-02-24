@@ -3,7 +3,7 @@
         .logo-text {
         font-family: "Brush Script MT", "Segoe Script", cursive;
         font-size: 120px;
-        fill: currentColor;
+        fill: white;
         }
     </style>
 
@@ -13,7 +13,7 @@
 
     <path
             d="M140 150 Q300 180 460 150"
-            stroke="currentColor"
+            stroke="white"
             stroke-width="6"
             fill="none"
             stroke-linecap="round"
