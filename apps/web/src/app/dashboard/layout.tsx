@@ -16,9 +16,13 @@ export default async function Layout({ children }: { children: ReactNode }) {
     <SidebarProvider>
       <AppSidebar />
       <main className="w-full">
-        <MobileNav />
         <SidebarTrigger className="hidden md:block" />
-        <div className="w-full p-3 md:px-5 md:pt-0 md:pb-5">{children}</div>
+
+        <div className="mb-[60px] w-full p-3 md:px-5 md:pt-0 md:pb-5">
+          {children}
+        </div>
+
+        <MobileNav />
       </main>
     </SidebarProvider>
   );

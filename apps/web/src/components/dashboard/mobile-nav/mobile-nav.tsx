@@ -11,7 +11,7 @@ export default function MobileNav() {
   const pathName = usePathname();
 
   return (
-    <div className="flex w-full items-center justify-between gap-4 p-3 md:hidden">
+    <div className="bg-background fixed bottom-0 box-border flex h-[60px] w-full items-center justify-between gap-4 border-t p-3 md:hidden">
       {NAV_ITEMS.map((item) => (
         <Button
           variant="secondary"
