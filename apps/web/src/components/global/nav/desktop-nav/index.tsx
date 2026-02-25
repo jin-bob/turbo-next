@@ -6,7 +6,7 @@ import LoginLink from '@/src/components/home/login-link';
 
 export default function DesktopNav() {
   return (
-    <nav className="bg-header sticky top-0 hidden w-full items-center gap-4 p-4 md:flex">
+    <nav className="bg-header sticky top-0 z-20 hidden w-full items-center gap-4 p-4 md:flex">
       <Link href="/apps/web/public">
         <Logo className="h-12 w-[144px] text-white" />
       </Link>

@@ -2,8 +2,6 @@ import Link from 'next/link';
 import { Linkedin } from 'lucide-react';
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-
   return (
     <footer className="bottom-0 mt-3 flex w-full flex-col">
       <div className="h-[200px] w-full bg-gradient-to-b from-[var(--background)] to-[var(--header))]" />
@@ -17,7 +15,7 @@ export default function Footer() {
         </a>
 
         <div className="flex gap-2">
-          <span>{currentYear}</span>
+          <span>2026</span>
 
           <Link href={'/'}>Recall</Link>
         </div>
