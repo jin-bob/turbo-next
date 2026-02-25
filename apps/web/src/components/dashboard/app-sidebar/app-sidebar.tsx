@@ -10,7 +10,7 @@ import FooterMenu from '@/src/components/dashboard/app-sidebar/footer-menu';
 
 export default function AppSidebar() {
   return (
-    <Sidebar className="hidden md:block">
+    <Sidebar className="relative hidden md:fixed [[data-state=collapsed]>&]:!w-0">
       <SidebarHeader>
         <Logo />
       </SidebarHeader>
