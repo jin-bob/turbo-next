@@ -13,9 +13,69 @@
  */
 
 // Source: schema.json
-export type AboutPage = {
+export type CatImageReference = {
+  _ref: string;
+  _type: 'reference';
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: 'catImage';
+};
+
+export type GalleryPage = {
   _id: string;
-  _type: 'aboutPage';
+  _type: 'galleryPage';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  catImages?: Array<
+    {
+      _key: string;
+    } & CatImageReference
+  >;
+};
+
+export type SanityImageAssetReference = {
+  _ref: string;
+  _type: 'reference';
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+};
+
+export type CatImage = {
+  _id: string;
+  _type: 'catImage';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: 'image';
+  };
+  name?: string;
+};
+
+export type SanityImageCrop = {
+  _type: 'sanity.imageCrop';
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: 'sanity.imageHotspot';
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
+
+export type ContactPage = {
+  _id: string;
+  _type: 'contactPage';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -44,6 +104,33 @@ export type Slug = {
   _type: 'slug';
   current?: string;
   source?: string;
+};
+
+export type AboutPage = {
+  _id: string;
+  _type: 'aboutPage';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  slug?: Slug;
+  content?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: 'span';
+      _key: string;
+    }>;
+    style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote';
+    listItem?: 'bullet' | 'number';
+    markDefs?: Array<{
+      href?: string;
+      _type: 'link';
+      _key: string;
+    }>;
+    level?: number;
+    _type: 'block';
+    _key: string;
+  }>;
 };
 
 export type CustomEvent = {
@@ -118,13 +205,6 @@ export type CardInfo = {
   rating?: number;
 };
 
-export type SanityImageAssetReference = {
-  _ref: string;
-  _type: 'reference';
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-};
-
 export type ProjectInfo = {
   _id: string;
   _type: 'projectInfo';
@@ -142,22 +222,6 @@ export type ProjectInfo = {
     _type: 'image';
   };
   techs?: Array<string>;
-};
-
-export type SanityImageCrop = {
-  _type: 'sanity.imageCrop';
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-};
-
-export type SanityImageHotspot = {
-  _type: 'sanity.imageHotspot';
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
 };
 
 export type ProjectInfoReference = {
@@ -298,18 +362,22 @@ export type Geopoint = {
 };
 
 export type AllSanitySchemaTypes =
-  | AboutPage
+  | CatImageReference
+  | GalleryPage
+  | SanityImageAssetReference
+  | CatImage
+  | SanityImageCrop
+  | SanityImageHotspot
+  | ContactPage
   | Slug
+  | AboutPage
   | CustomEvent
   | CustomEventReference
   | TablePage
   | CardInfoReference
   | CardsPage
   | CardInfo
-  | SanityImageAssetReference
   | ProjectInfo
-  | SanityImageCrop
-  | SanityImageHotspot
   | ProjectInfoReference
   | DashboardPage
   | HomePage
@@ -348,10 +416,46 @@ export type GetAboutPageContentResult = {
   }> | null;
 } | null;
 
+// Source: ../web/src/app/(app-home)/contact/page.tsx
+// Variable: contactPageQuery
+// Query: *[_type=="contactPage"][0]{content}
+export type ContactPageQueryResult = {
+  content: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: 'span';
+      _key: string;
+    }>;
+    style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal';
+    listItem?: 'bullet' | 'number';
+    markDefs?: Array<{
+      href?: string;
+      _type: 'link';
+      _key: string;
+    }>;
+    level?: number;
+    _type: 'block';
+    _key: string;
+  }> | null;
+} | null;
+
+// Source: ../web/src/app/(app-home)/gallery/page.tsx
+// Variable: getGalleryPageQuery
+// Query: *[_type=="galleryPage"][0]{  title,  catImages[]->{    "url": image.asset->url  }}
+export type GetGalleryPageQueryResult = {
+  title: string | null;
+  catImages: Array<{
+    url: string | null;
+  }> | null;
+} | null;
+
 // Query TypeMap
 import '@sanity/client';
 declare module '@sanity/client' {
   interface SanityQueries {
     '*[_type=="aboutPage"][0]{\ncontent\n}': GetAboutPageContentResult;
+    '*[_type=="contactPage"][0]{\ncontent\n}': ContactPageQueryResult;
+    '*[_type=="galleryPage"][0]{\n  title,\n  catImages[]->{\n    "url": image.asset->url\n  }\n}': GetGalleryPageQueryResult;
   }
 }

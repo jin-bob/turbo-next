@@ -6,6 +6,9 @@ import {cardsPage} from './cards-page'
 import {tablePage} from './table-page'
 import {customEvent} from './custom-event'
 import {aboutPage} from './about-page'
+import {contactPage} from './contact-page'
+import {cat} from './cat'
+import {galleryPage} from './gallery-page'
 
 export const documents = [
   homePage,
@@ -16,4 +19,7 @@ export const documents = [
   tablePage,
   customEvent,
   aboutPage,
+  contactPage,
+  cat,
+  galleryPage,
 ]
