@@ -1,14 +1,13 @@
-import { PropsWithChildren } from 'react';
 import { Info } from 'lucide-react';
 import { CardFooter } from '@/src/components/ui/card';
-import { ProjectCardType } from '@/src/components/dashboard/dashboard-root/projects-section/project-card';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/src/components/ui/popover';
+import { ProjectCardProps } from '@/src/components/dashboard/dashboard-root/projects-section/project-card';
 
-type ProjectCardFooterProps = PropsWithChildren<Pick<ProjectCardType, 'techs'>>;
+type ProjectCardFooterProps = NonNullable<Pick<ProjectCardProps, 'techs'>>;
 
 export default function ProjectCardFooter({ techs }: ProjectCardFooterProps) {
   return (
@@ -23,9 +22,7 @@ export default function ProjectCardFooter({ techs }: ProjectCardFooterProps) {
         </PopoverTrigger>
         <PopoverContent className="bg-background w-fit">
           <ul className="text-start">
-            {techs.map((tech, i) => (
-              <li key={i}>{tech}</li>
-            ))}
+            {techs?.length && techs.map((tech, i) => <li key={i}>{tech}</li>)}
           </ul>
         </PopoverContent>
       </Popover>

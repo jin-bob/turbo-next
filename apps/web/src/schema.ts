@@ -450,6 +450,63 @@ export type GetGalleryPageQueryResult = {
   }> | null;
 } | null;
 
+// Source: ../web/src/app/dashboard/cards/page.tsx
+// Variable: getCardsPageDataQuery
+// Query: *[_type=="cardsPage"][0]{ h1, subText, "infoCards": infoCards[]->{   name,   shortDescription,   amount,   rating }}
+export type GetCardsPageDataQueryResult = {
+  h1: string | null;
+  subText: string | null;
+  infoCards: Array<{
+    name: string | null;
+    shortDescription: string | null;
+    amount: number | null;
+    rating: number | null;
+  }> | null;
+} | null;
+
+// Source: ../web/src/app/dashboard/table/page.tsx
+// Variable: totalCountQuery
+// Query: count(*[    _type == "customEvent" &&    (      $search == "*" ||      name match $search + "*" ||      description match $search + "*"    )  ])
+export type TotalCountQueryResult = number;
+
+// Source: ../web/src/components/dashboard/dashboard-root/info-section.tsx
+// Variable: getInfoSectionQuery
+// Query: *[_type=="dashboardPage"][0]{  h1,  subText,  detailInfo,  "avatar":avatar.asset->url}
+export type GetInfoSectionQueryResult = {
+  h1: string | null;
+  subText: string | null;
+  detailInfo: Array<string> | null;
+  avatar: string | null;
+} | null;
+
+// Source: ../web/src/components/dashboard/dashboard-root/projects-section/project-section.tsx
+// Variable: getProjectsSectionQuery
+// Query: *[_type=="dashboardPage"][0]{ cardsTitle, cards[]->{   projectName,   link,   projectDescription,   techs,   "logo":projectLogo.asset->url }}
+export type GetProjectsSectionQueryResult = {
+  cardsTitle: string | null;
+  cards: Array<{
+    projectName: string | null;
+    link: string | null;
+    projectDescription: string | null;
+    techs: Array<string> | null;
+    logo: string | null;
+  }> | null;
+} | null;
+
+// Source: ../web/src/components/dashboard/table/table.tsx
+// Variable: getCustomEventsQuery
+// Query: *[_type == "customEvent" &&    (      $search == "*" ||      name match $search + "*" ||      description match $search + "*"    )][$start...$end]{    "slug": slug.current,    name,    description,    startDate,    endDate,    categories,    status,    type,}
+export type GetCustomEventsQueryResult = Array<{
+  slug: string | null;
+  name: string | null;
+  description: string | null;
+  startDate: string | null;
+  endDate: string | null;
+  categories: Array<'Development' | 'Marketing'> | null;
+  status: 'approved' | 'inProgress' | null;
+  type: 'external' | 'internal' | null;
+}>;
+
 // Query TypeMap
 import '@sanity/client';
 declare module '@sanity/client' {
@@ -457,5 +514,10 @@ declare module '@sanity/client' {
     '*[_type=="aboutPage"][0]{\ncontent\n}': GetAboutPageContentResult;
     '*[_type=="contactPage"][0]{\ncontent\n}': ContactPageQueryResult;
     '*[_type=="galleryPage"][0]{\n  title,\n  catImages[]->{\n    "url": image.asset->url\n  }\n}': GetGalleryPageQueryResult;
+    '*[_type=="cardsPage"][0]{\n h1,\n subText,\n "infoCards": infoCards[]->{\n   name,\n   shortDescription,\n   amount,\n   rating\n }\n}\n': GetCardsPageDataQueryResult;
+    'count(*[\n    _type == "customEvent" &&\n    (\n      $search == "*" ||\n      name match $search + "*" ||\n      description match $search + "*"\n    )\n  ])': TotalCountQueryResult;
+    '*[_type=="dashboardPage"][0]{\n  h1,\n  subText,\n  detailInfo,\n  "avatar":avatar.asset->url\n}\n': GetInfoSectionQueryResult;
+    '*[_type=="dashboardPage"][0]{\n cardsTitle,\n cards[]->{\n   projectName,\n   link,\n   projectDescription,\n   techs,\n   "logo":projectLogo.asset->url\n }\n}': GetProjectsSectionQueryResult;
+    '*[_type == "customEvent" &&\n    (\n      $search == "*" ||\n      name match $search + "*" ||\n      description match $search + "*"\n    )][$start...$end]{\n    "slug": slug.current,\n    name,\n    description,\n    startDate,\n    endDate,\n    categories,\n    status,\n    type,\n}\n': GetCustomEventsQueryResult;
   }
 }

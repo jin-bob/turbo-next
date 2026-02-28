@@ -1,25 +1,22 @@
-import ListCard, {
-  type ListCardData,
-} from '@/src/components/dashboard/cards/list-card';
+import ListCard from '@/src/components/dashboard/cards/list-card';
+import { GetCardsPageDataQueryResult } from '@/src/schema';
 
 export type ListProps = {
-  cards: Array<ListCardData>;
+  cards: NonNullable<GetCardsPageDataQueryResult>['infoCards'];
 };
 
 export default function List({ cards }: ListProps) {
   return (
     <div className="flex flex-col gap-8">
       <div className="grid w-full auto-rows-auto grid-cols-1 justify-items-center gap-[24px] px-[15px] pt-2.5 min-[1100px]:grid-cols-3 md:grid-cols-2">
-        {cards.map((card) => {
+        {cards?.map(({ name, shortDescription, amount, rating }) => {
           return (
             <ListCard
-              key={card.id}
-              name={card.name}
-              id={card.id}
-              image={card.image}
-              shortDescription={card.shortDescription}
-              amount={card.amount}
-              rating={card.rating}
+              key={name}
+              name={name || ''}
+              shortDescription={shortDescription || ''}
+              amount={amount || 0}
+              rating={rating || 0}
             />
           );
         })}

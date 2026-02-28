@@ -1,12 +1,14 @@
 'use client';
 
 import { createColumnHelper } from '@tanstack/react-table';
-import { TableDataResponseObject } from '@/src/actions/get-table-data';
 import TruncateCell from '@/src/components/global/tables/cells/truncate-cell';
 import StatusCell from '@/src/components/dashboard/table/cells/status-cell';
 import { getConvertedDate } from '@/src/helpers/getConvertedDate';
+import { GetCustomEventsQueryResult } from '@/src/schema';
 
-const columnHelper = createColumnHelper<TableDataResponseObject>();
+type Column = Omit<GetCustomEventsQueryResult[number], 'slug'>;
+
+const columnHelper = createColumnHelper<Column>();
 
 export const COLUMNS = [
   columnHelper.accessor('name', {
@@ -25,7 +27,7 @@ export const COLUMNS = [
     cell: ({ getValue }) => {
       const value = getValue();
 
-      return <div>{getConvertedDate(value)}</div>;
+      return <div>{getConvertedDate(value || undefined)}</div>;
     },
   }),
   columnHelper.accessor('endDate', {
@@ -34,7 +36,7 @@ export const COLUMNS = [
     cell: ({ getValue }) => {
       const value = getValue();
 
-      return <div>{getConvertedDate(value)}</div>;
+      return <div>{getConvertedDate(value || undefined)}</div>;
     },
   }),
   columnHelper.accessor('type', {
@@ -56,8 +58,8 @@ export const COLUMNS = [
       return (
         <ul className="max-h-[20px] overflow-y-auto">
           {categories.map((category) => (
-            <li key={category.id} className="max-w-[150px] truncate">
-              {category.name}
+            <li key={category} className="max-w-[150px] truncate">
+              {category}
             </li>
           ))}
         </ul>

@@ -25,11 +25,16 @@ const STATUS_DICTIONARY: Record<
 
 export default function StatusCell<
   TData extends RowData,
-  TValue extends string,
+  TValue extends string | null,
 >({ getValue }: CellContext<TData, TValue>) {
   const status = getValue();
 
-  const statusData = STATUS_DICTIONARY[status] || null;
+  const statusData =
+    status && STATUS_DICTIONARY.hasOwnProperty(status)
+      ? STATUS_DICTIONARY[status]
+      : null;
+
+  if (!statusData) return null;
 
   return (
     <div>

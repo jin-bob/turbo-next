@@ -1,4 +1,3 @@
-import { PropsWithChildren } from 'react';
 import Image from 'next/image';
 import { Link } from 'lucide-react';
 import {
@@ -10,29 +9,26 @@ import {
 } from '@/src/components/ui/card';
 import { cn } from '@/src/lib/utils';
 import ProjectCardFooter from '@/src/components/dashboard/dashboard-root/projects-section/project-card-footer';
+import { GetProjectsSectionQueryResult } from '@/src/schema';
 
-export type ProjectCardType = PropsWithChildren<{
-  title: string;
-  link?: string;
-  content: string;
-  image: string;
-  techs: string[];
-}>;
+export type ProjectCardProps = NonNullable<
+  NonNullable<GetProjectsSectionQueryResult>['cards']
+>[number];
 
 export default function ProjectCard({
-  title,
+  projectName,
   link,
-  content,
-  image,
+  projectDescription,
+  logo,
   techs,
-}: ProjectCardType) {
+}: ProjectCardProps) {
   return (
     <Card className="mobl:w-[300px] box-border flex h-[355px] w-[240px] flex-col">
       <CardHeader>
-        <CardTitle>{title}</CardTitle>
+        <CardTitle>{projectName}</CardTitle>
         <CardDescription className="flex items-center justify-center">
           <a
-            href={link}
+            href={link || ''}
             target="_blank"
             rel="noopener noreferrer"
             className={cn(
@@ -47,9 +43,9 @@ export default function ProjectCard({
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-1 flex-col items-center gap-1">
-        <p className="flex-1 text-start">{content}</p>
+        <p className="flex-1 text-start">{projectDescription}</p>
         <Image
-          src={`/svg/project-logos/${image}-logo.svg`}
+          src={logo || ''}
           alt="project-image"
           width={192}
           height={28}
