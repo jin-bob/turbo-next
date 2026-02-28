@@ -450,9 +450,19 @@ export type GetGalleryPageQueryResult = {
   }> | null;
 } | null;
 
+// Source: ../web/src/app/dashboard/cards/[cardSlug]/page.tsx
+// Variable: getCardPageQuery
+// Query: *[_type == "cardInfo" && slug.current == $cardSlug][0]{   name,   shortDescription,   amount,   rating,}
+export type GetCardPageQueryResult = {
+  name: string | null;
+  shortDescription: string | null;
+  amount: number | null;
+  rating: number | null;
+} | null;
+
 // Source: ../web/src/app/dashboard/cards/page.tsx
 // Variable: getCardsPageDataQuery
-// Query: *[_type=="cardsPage"][0]{ h1, subText, "infoCards": infoCards[]->{   name,   shortDescription,   amount,   rating }}
+// Query: *[_type=="cardsPage"][0]{ h1, subText, "infoCards": infoCards[]->{   name,   shortDescription,   amount,   rating,   "slug": slug.current, }}
 export type GetCardsPageDataQueryResult = {
   h1: string | null;
   subText: string | null;
@@ -461,6 +471,7 @@ export type GetCardsPageDataQueryResult = {
     shortDescription: string | null;
     amount: number | null;
     rating: number | null;
+    slug: string | null;
   }> | null;
 } | null;
 
@@ -514,7 +525,8 @@ declare module '@sanity/client' {
     '*[_type=="aboutPage"][0]{\ncontent\n}': GetAboutPageContentResult;
     '*[_type=="contactPage"][0]{\ncontent\n}': ContactPageQueryResult;
     '*[_type=="galleryPage"][0]{\n  title,\n  catImages[]->{\n    "url": image.asset->url\n  }\n}': GetGalleryPageQueryResult;
-    '*[_type=="cardsPage"][0]{\n h1,\n subText,\n "infoCards": infoCards[]->{\n   name,\n   shortDescription,\n   amount,\n   rating\n }\n}\n': GetCardsPageDataQueryResult;
+    '*[_type == "cardInfo" && slug.current == $cardSlug][0]{\n   name,\n   shortDescription,\n   amount,\n   rating,\n}': GetCardPageQueryResult;
+    '*[_type=="cardsPage"][0]{\n h1,\n subText,\n "infoCards": infoCards[]->{\n   name,\n   shortDescription,\n   amount,\n   rating,\n   "slug": slug.current,\n }\n}\n': GetCardsPageDataQueryResult;
     'count(*[\n    _type == "customEvent" &&\n    (\n      $search == "*" ||\n      name match $search + "*" ||\n      description match $search + "*"\n    )\n  ])': TotalCountQueryResult;
     '*[_type=="dashboardPage"][0]{\n  h1,\n  subText,\n  detailInfo,\n  "avatar":avatar.asset->url\n}\n': GetInfoSectionQueryResult;
     '*[_type=="dashboardPage"][0]{\n cardsTitle,\n cards[]->{\n   projectName,\n   link,\n   projectDescription,\n   techs,\n   "logo":projectLogo.asset->url\n }\n}': GetProjectsSectionQueryResult;

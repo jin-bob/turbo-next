@@ -9,7 +9,8 @@ const getCardsPageDataQuery = defineQuery(`*[_type=="cardsPage"][0]{
    name,
    shortDescription,
    amount,
-   rating
+   rating,
+   "slug": slug.current,
  }
 }
 `);
@@ -17,6 +18,7 @@ const getCardsPageDataQuery = defineQuery(`*[_type=="cardsPage"][0]{
 export default async function CardsPage() {
   const data = await client.fetch(getCardsPageDataQuery);
 
+  console.log('data', data);
   return (
     <main className="w-full">
       <div className="space-y-3">
