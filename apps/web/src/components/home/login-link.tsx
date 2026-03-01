@@ -11,6 +11,7 @@ export default async function LoginLink({ className }: LoginLinkProps) {
   const user = await getUser();
 
   const text = user ? 'Dashboard' : 'Login';
+  const ariaLabel = user ? 'Open Dashboard page' : 'Log in and open Dashboard';
 
   return (
     <Button
@@ -18,7 +19,9 @@ export default async function LoginLink({ className }: LoginLinkProps) {
       variant="default"
       className={cn('h-[64px] w-[240px] text-xl font-semibold', className)}
     >
-      <Link href="/dashboard">{text}</Link>
+      <Link href="/dashboard" aria-label={ariaLabel}>
+        {text}
+      </Link>
     </Button>
   );
 }

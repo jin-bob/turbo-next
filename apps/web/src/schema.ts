@@ -450,6 +450,11 @@ export type GetGalleryPageQueryResult = {
   }> | null;
 } | null;
 
+// Source: ../web/src/app/(app-home)/gallery/page.tsx
+// Variable: getGalleryCatImagesCountQuery
+// Query: count(*[_type=="galleryPage"][0].catImages)
+export type GetGalleryCatImagesCountQueryResult = number | null;
+
 // Source: ../web/src/app/dashboard/cards/[cardSlug]/page.tsx
 // Variable: getCardPageQuery
 // Query: *[_type == "cardInfo" && slug.current == $cardSlug][0]{   name,   shortDescription,   amount,   rating,}
@@ -525,6 +530,7 @@ declare module '@sanity/client' {
     '*[_type=="aboutPage"][0]{\ncontent\n}': GetAboutPageContentResult;
     '*[_type=="contactPage"][0]{\ncontent\n}': ContactPageQueryResult;
     '*[_type=="galleryPage"][0]{\n  title,\n  catImages[]->{\n    "url": image.asset->url\n  }\n}': GetGalleryPageQueryResult;
+    'count(*[_type=="galleryPage"][0].catImages)': GetGalleryCatImagesCountQueryResult;
     '*[_type == "cardInfo" && slug.current == $cardSlug][0]{\n   name,\n   shortDescription,\n   amount,\n   rating,\n}': GetCardPageQueryResult;
     '*[_type=="cardsPage"][0]{\n h1,\n subText,\n "infoCards": infoCards[]->{\n   name,\n   shortDescription,\n   amount,\n   rating,\n   "slug": slug.current,\n }\n}\n': GetCardsPageDataQueryResult;
     'count(*[\n    _type == "customEvent" &&\n    (\n      $search == "*" ||\n      name match $search + "*" ||\n      description match $search + "*"\n    )\n  ])': TotalCountQueryResult;

@@ -1,9 +1,15 @@
+import { Metadata } from 'next';
 import { defineQuery } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
 import { simpleComponent } from '@/src/components/global/simple-components';
 import { client } from '@/src/lib/sanity/client';
 
 export const dynamic = 'force-static';
+
+export const metadata: Metadata = {
+  title: 'Contact',
+  description: 'Some Contact Information',
+};
 
 const contactPageQuery = defineQuery(`*[_type=="contactPage"][0]{
 content

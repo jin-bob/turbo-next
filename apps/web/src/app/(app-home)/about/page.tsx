@@ -1,9 +1,15 @@
+import { Metadata } from 'next';
 import { defineQuery } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
 import { simpleComponent } from '@/src/components/global/simple-components';
 import { client } from '@/src/lib/sanity/client';
 
 export const dynamic = 'force-static';
+
+export const metadata: Metadata = {
+  title: 'About',
+  description: 'Learn more about our project, its goals, and how it was built.',
+};
 
 const getAboutPageContent = defineQuery(`*[_type=="aboutPage"][0]{
 content

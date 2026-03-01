@@ -1,8 +1,9 @@
 import { Suspense } from 'react';
+import { Metadata } from 'next';
+import { defineQuery } from 'next-sanity';
 import Table from '@/src/components/dashboard/table/table';
 import { client } from '@/src/lib/sanity/client';
 import TablePageFallback from '@/src/components/skeletons/table-page/table-page-fallback';
-import { defineQuery } from 'next-sanity';
 
 const PAGE_SIZE = 7;
 
@@ -20,6 +21,10 @@ type TablePageProps = {
     page?: string;
     search?: string;
   }>;
+};
+
+export const metadata: Metadata = {
+  title: 'Table',
 };
 
 export default async function TablePage(props: TablePageProps) {

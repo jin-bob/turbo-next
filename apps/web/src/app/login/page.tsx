@@ -1,6 +1,11 @@
+import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import GoogleLoginButton from '@/src/components/global/google-login-button';
 import { getUser } from '@/src/lib/firebase/get-user';
+
+export const metadata: Metadata = {
+  robots: 'noindex, nofollow',
+};
 
 export default async function Login() {
   const user = await getUser();

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { Metadata } from 'next';
 import { defineQuery } from 'next-sanity';
 import { client } from '@/src/lib/sanity/client';
 
@@ -10,6 +11,19 @@ const getGalleryPageQuery = defineQuery(`*[_type=="galleryPage"][0]{
     "url": image.asset->url
   }
 }`);
+
+const getGalleryCatImagesCountQuery = defineQuery(
+  `count(*[_type=="galleryPage"][0].catImages)`,
+);
+
+export async function generateMetadata(): Promise<Metadata> {
+  const data = await client.fetch(getGalleryCatImagesCountQuery);
+
+  return {
+    title: 'Gallery',
+    description: `Here are ${data || 0} images of kittens!!!`,
+  };
+}
 
 export default async function GalleryPage() {
   const data = await client.fetch(getGalleryPageQuery);

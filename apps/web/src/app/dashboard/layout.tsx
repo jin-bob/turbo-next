@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import {
   SidebarInset,
@@ -8,6 +9,10 @@ import {
 import AppSidebar from '@/src/components/dashboard/app-sidebar/app-sidebar';
 import MobileNav from '@/src/components/dashboard/mobile-nav/mobile-nav';
 import { getUser } from '@/src/lib/firebase/get-user';
+
+export const metadata: Metadata = {
+  robots: 'noindex, nofollow',
+};
 
 export default async function Layout({ children }: { children: ReactNode }) {
   const user = await getUser();

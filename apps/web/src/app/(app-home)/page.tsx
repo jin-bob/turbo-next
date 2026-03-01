@@ -1,4 +1,11 @@
 import LoginLink from '@/src/components/home/login-link';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Home',
+  description:
+    'This is example of monorepo project. Created using Turborepo build system',
+};
 
 export default function Home() {
   return (
