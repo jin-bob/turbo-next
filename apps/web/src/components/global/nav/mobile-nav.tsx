@@ -33,9 +33,9 @@ export default function MobileNav() {
   }, []);
 
   return (
-    <nav className="bg-header sticky top-0 z-20 flex w-full items-center justify-between gap-2 p-2 md:hidden">
-      <Link href="/apps/web/public">
-        <Logo className="h-12 w-[144px] text-white" />
+    <nav className="bg-header sticky top-0 z-20 flex w-full items-center justify-between gap-2 px-6 py-2 md:hidden">
+      <Link href="/">
+        <Logo />
       </Link>
 
       <button

@@ -1,29 +1,44 @@
-import LoginLink from '@/src/components/home/login-link';
-import { Metadata } from 'next';
+import { type Metadata } from 'next';
+import { defineQuery } from 'next-sanity';
+import TechSlider from '@/src/components/home/tech-slider';
+import ExperienceSection from '@/src/components/home/experience-section';
+import EducationSection from '@/src/components/home/education-section';
+import ContactSection from '@/src/components/home/contact-section';
+import CompanySlider from '@/src/components/home/company-slider';
+import InfoSection from '@/src/components/home/info-section';
+import AboutSection from '@/src/components/home/about-section';
+import { client } from '@/src/lib/sanity/client';
+
+export const dynamic = 'force-static';
 
 export const metadata: Metadata = {
-  title: 'Home',
-  description:
-    'This is example of monorepo project. Created using Turborepo build system',
+  title: 'Home Page',
+  description: 'Created by Yevhenii Bober, Software Developer',
 };
 
-export default function Home() {
+const getHomePageQuery = defineQuery(`*[_type=="homePage"][0]{
+content
+}`);
+
+export default async function Home() {
+  const data = await client.fetch(getHomePageQuery);
+
+  console.log('data: ', data);
   return (
-    <main className="w-full space-y-3">
-      <div className="h-[208px] w-full bg-gradient-to-b from-[var(--header)] to-[var(--background)]" />
+    <main className="mx-auto w-full max-w-[90rem] px-6 md:px-[60px] lg:px-[120px]">
+      <InfoSection />
 
-      <div className="flex flex-col items-center justify-between gap-2 px-4 md:px-6">
-        <h1 className="max-w-[775px] text-center text-[36px]/[110%] font-semibold text-zinc-400 md:text-[64px]/[120%] dark:text-zinc-200">
-          Welcome, this is example of monorepo project. Created using Turborepo
-          build system
-        </h1>
+      <AboutSection />
 
-        <div className="mt-4 text-base font-semibold text-zinc-400 dark:text-zinc-200">
-          Go to Dashboard
-        </div>
+      <TechSlider />
 
-        <LoginLink />
-      </div>
+      <ExperienceSection />
+
+      <CompanySlider />
+
+      <EducationSection />
+
+      <ContactSection />
     </main>
   );
 }

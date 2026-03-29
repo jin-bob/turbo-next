@@ -9,7 +9,7 @@ export default function NavLinks() {
   const pathName = usePathname();
 
   return (
-    <div className="flex flex-1 items-center justify-center gap-[70px] lg:gap-[100px]">
+    <div className="flex flex-1 items-center justify-center gap-[54px] lg:gap-[68px] xl:gap-[100px]">
       {navbarLinks.map((link) => (
         <Link
           href={link.href}

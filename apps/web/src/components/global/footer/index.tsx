@@ -3,9 +3,8 @@ import { Linkedin } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="bottom-0 mt-3 flex w-full flex-col">
-      <div className="h-[200px] w-full bg-gradient-to-b from-[var(--background)] to-[var(--header))]" />
-      <div className="bg-header mx-auto box-border flex h-[48px] w-full items-center justify-between gap-4 px-3 text-white md:px-5">
+    <footer className="bg-header bottom-0 mt-3 flex w-full">
+      <div className="mx-auto box-border flex h-[48px] w-full max-w-[90rem] items-center justify-between gap-4 px-6 text-white md:px-[120px]">
         <a
           href="https://www.linkedin.com/in/mdbobskiy/"
           target="_blank"

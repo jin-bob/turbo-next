@@ -6,18 +6,20 @@ import LoginLink from '@/src/components/home/login-link';
 
 export default function DesktopNav() {
   return (
-    <nav className="bg-header sticky top-0 z-20 hidden w-full items-center gap-4 p-4 md:flex">
-      <Link href="/apps/web/public">
-        <Logo className="h-12 w-[144px] text-white" />
-      </Link>
+    <div className="bg-header sticky top-0 z-20 hidden w-full justify-center md:flex">
+      <nav className="flex w-full max-w-[90rem] items-center gap-4 px-6 py-4 md:px-[60px] lg:px-[120px]">
+        <Link href="/">
+          <Logo className="text-white" />
+        </Link>
 
-      <NavLinks />
+        <NavLinks />
 
-      <div className="flex flex-row items-center justify-between gap-2">
-        <LoginLink className="h-fit w-fit text-base" />
+        <div className="flex flex-row items-center justify-between gap-2">
+          <LoginLink className="h-fit w-fit text-base" />
 
-        <ThemeToggle />
-      </div>
-    </nav>
+          <ThemeToggle />
+        </div>
+      </nav>
+    </div>
   );
 }
