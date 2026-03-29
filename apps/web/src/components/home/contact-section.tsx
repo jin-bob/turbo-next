@@ -27,7 +27,7 @@ export default function ContactSection() {
 
               <Button asChild variant="outline" className="text-header">
                 <a
-                  href="https://linkedin.com/in/mdbobskiy777"
+                  href="https://www.linkedin.com/in/mdbobskiy"
                   rel="noopener noreferrer"
                   target="_blank"
                 >

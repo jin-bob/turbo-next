@@ -36,7 +36,7 @@ export default function InfoSection() {
       <div className="text-center text-2xl font-light">
         <p>Frontend Developer with 5 years of experience</p>
         <p>building scalable and user-focused web applications</p>
-        <p> with React, TypeScript, and Next.js.</p>
+        <p>with React, TypeScript, and Next.js.</p>
       </div>
     </>
   );

@@ -6,28 +6,23 @@ export const projectInfo = defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+    }),
+    defineField({
       name: 'projectName',
       title: 'Project Name',
       type: 'string',
     }),
     defineField({
-      name: 'link',
-      type: 'url',
-      title: 'Project Link',
-    }),
-    defineField({
       name: 'projectDescription',
       title: 'Project Description',
-      type: 'text',
+      type: 'string',
     }),
     defineField({
-      name: 'projectLogo',
-      title: 'Project Logo',
-      type: 'image',
-    }),
-    defineField({
-      name: 'techs',
-      title: 'Technologies used',
+      name: 'content',
+      title: 'Content',
       type: 'array',
       of: [{type: 'string'}],
     }),

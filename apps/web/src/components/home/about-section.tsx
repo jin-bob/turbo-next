@@ -1,3 +1,5 @@
+import TechSlider from '@/src/components/home/tech-slider';
+
 export default function AboutSection() {
   return (
     <section className="mt-[150px] space-y-16">
@@ -16,7 +18,7 @@ export default function AboutSection() {
 
         <div className="flex-1">
           <div className="text-lg/[22px] font-light">
-            <p> Experienced in reusable UI development, API integrations,</p>
+            <p>Experienced in reusable UI development, API integrations,</p>
 
             <p>
               analytics, performance optimization, and frontend architecture.
@@ -26,10 +28,12 @@ export default function AboutSection() {
               Open to remote frontend opportunities and interested in building
             </p>
 
-            <p> modern, high-quality product experiences.</p>
+            <p>modern, high-quality product experiences.</p>
           </div>
         </div>
       </div>
+
+      <TechSlider />
     </section>
   );
 }
