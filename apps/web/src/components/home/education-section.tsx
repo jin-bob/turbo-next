@@ -1,14 +1,26 @@
 import Image from 'next/image';
+import type { GetHomePageQueryResult } from '@/src/schema';
 
-export default function EducationSection() {
+type EducationSectionProps = {
+  data:
+    | NonNullable<GetHomePageQueryResult>['educationSection']
+    | null
+    | undefined;
+};
+
+export default function EducationSection({ data }: EducationSectionProps) {
+  if (!data) {
+    return null;
+  }
+
   return (
     <div>
       <h3 className="text-header my-16 text-3xl font-semibold uppercase">
-        Education
+        {data?.slug?.current}
       </h3>
 
       <a
-        href="https://kpi.ua/en/"
+        href={data?.link}
         target="_blank"
         rel="noreferrer nofollow"
         className="block"
@@ -25,7 +37,7 @@ export default function EducationSection() {
           </div>
 
           <Image
-            src="/images/education/kpi-big-logo.png"
+            src={data?.logo || ''}
             alt="kpi-big-logo"
             className="bg-background mobsm:flex relative z-10 hidden aspect-square w-auto max-w-[75px] flex-1 shrink-0 rounded-full object-cover object-center sm:max-w-[150px] md:max-w-[180px] lg:max-w-[300px]"
             width={313}
@@ -33,18 +45,12 @@ export default function EducationSection() {
           />
 
           <div className="mobsm:text-start relative z-10 space-y-3 text-center text-white">
-            <h3 className="text-xl md:text-2xl lg:text-4xl">
-              Master Degree in Computer Science
-            </h3>
+            <h3 className="text-xl md:text-2xl lg:text-4xl">{data?.h3}</h3>
 
-            <p className="text-2sm">
-              NTUU “Kyiv Polytechnic Institute” Kyiv | 2021
-            </p>
+            <p className="text-2sm">{data?.details}</p>
 
             <p className="text-2sm max-w-[600px] sm:text-xl md:text-2xl">
-              Acquired a solid foundation in computer science, software
-              engineering, algorithms, databases, and modern application
-              development
+              {data?.summary}
             </p>
           </div>
         </div>

@@ -1,18 +1,27 @@
 import Image from 'next/image';
 import { Sparkle } from 'lucide-react';
+import { PortableText } from '@portabletext/react';
+import { type GetHomePageQueryResult } from '@/src/schema';
+import { simpleComponent } from '@/src/components/global/simple-components';
 
-export default function InfoSection() {
+type InfoSectionProps = {
+  data: NonNullable<GetHomePageQueryResult>['infoSection'] | null | undefined;
+};
+
+export default function InfoSection({ data }: InfoSectionProps) {
+  if (!data) return null;
+
   return (
     <>
       <div className="mt:0 mt-6 mb-8 space-y-6 text-center md:mt-[96px]">
         <a
-          href="https://www.linkedin.com/in/mdbobskiy/"
+          href={data?.linkedinLink || ''}
           target="_blank"
           rel="noreferrer noopener"
           className="flex justify-center transition hover:saturate-75"
         >
           <Image
-            src="/images/avatar.webp"
+            src={data?.avatar || ''}
             alt="avatar"
             width={256}
             height={256}
@@ -23,9 +32,9 @@ export default function InfoSection() {
 
         <div className="text-center">
           <h1 className="text-header text-6xl font-semibold uppercase">
-            Yevhenii Bober
+            {data?.username}
           </h1>
-          <h2 className="text-3xl text-zinc-500">Software Developer</h2>
+          <h2 className="text-3xl text-zinc-500">{data?.jobTitle}</h2>
         </div>
       </div>
 
@@ -34,9 +43,10 @@ export default function InfoSection() {
       </div>
 
       <div className="text-center text-2xl font-light">
-        <p>Frontend Developer with 5 years of experience</p>
-        <p>building scalable and user-focused web applications</p>
-        <p>with React, TypeScript, and Next.js.</p>
+        <PortableText
+          value={data?.description ? data.description : []}
+          components={simpleComponent}
+        />
       </div>
     </>
   );

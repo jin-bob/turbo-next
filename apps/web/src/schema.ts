@@ -215,7 +215,6 @@ export type ProjectInfo = {
   _rev: string;
   slug?: Slug;
   projectName?: string;
-  description?: string;
   projectDescription?: string;
   content?: Array<string>;
 };
@@ -562,26 +561,18 @@ export type GetGalleryCatImagesCountQueryResult = number | null;
 
 // Source: ../web/src/app/(app-home)/page.tsx
 // Variable: getHomePageQuery
-// Query: *[_type=="homePage"][0]{...}
+// Query: *[_type=="homePage"][0]{  ...,  infoSection{    username,    linkedinLink,    jobTitle,    description,    "avatar": avatar.asset->url  },  aboutSection {  slug,   descriptionLeft,    descriptionRight,    "technologies": technologies[].asset->url  },  experienceSection {    slug,    "companies": companies[].asset->url,    projects[]->{      projectName,      projectDescription,      content    }  },  educationSection {    ...,    "logo": logo.asset->url,    }}
 export type GetHomePageQueryResult = {
   _id: string;
   _type: 'homePage';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  infoSection?: {
-    slug?: Slug;
-    linkedinLink?: string;
-    avatar?: {
-      asset?: SanityImageAssetReference;
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: 'image';
-    };
-    username?: string;
-    jobTitle?: string;
-    description?: Array<{
+  infoSection: {
+    username: string | null;
+    linkedinLink: string | null;
+    jobTitle: string | null;
+    description: Array<{
       children?: Array<{
         marks?: Array<string>;
         text?: string;
@@ -598,11 +589,12 @@ export type GetHomePageQueryResult = {
       level?: number;
       _type: 'block';
       _key: string;
-    }>;
-  };
-  aboutSection?: {
-    slug?: Slug;
-    descriptionLeft?: Array<{
+    }> | null;
+    avatar: string | null;
+  } | null;
+  aboutSection: {
+    slug: Slug | null;
+    descriptionLeft: Array<{
       children?: Array<{
         marks?: Array<string>;
         text?: string;
@@ -619,8 +611,8 @@ export type GetHomePageQueryResult = {
       level?: number;
       _type: 'block';
       _key: string;
-    }>;
-    descriptionRight?: Array<{
+    }> | null;
+    descriptionRight: Array<{
       children?: Array<{
         marks?: Array<string>;
         text?: string;
@@ -637,46 +629,26 @@ export type GetHomePageQueryResult = {
       level?: number;
       _type: 'block';
       _key: string;
-    }>;
-    technologies?: Array<{
-      asset?: SanityImageAssetReference;
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: 'image';
-      _key: string;
-    }>;
-  };
-  experienceSection?: {
-    slug?: Slug;
-    projects?: Array<
-      {
-        _key: string;
-      } & ProjectInfoReference
-    >;
-    companies?: Array<{
-      asset?: SanityImageAssetReference;
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: 'image';
-      _key: string;
-    }>;
-  };
-  educationSection?: {
+    }> | null;
+    technologies: Array<string | null> | null;
+  } | null;
+  experienceSection: {
+    slug: Slug | null;
+    companies: Array<string | null> | null;
+    projects: Array<{
+      projectName: string | null;
+      projectDescription: string | null;
+      content: Array<string> | null;
+    }> | null;
+  } | null;
+  educationSection: {
     slug?: Slug;
     link?: string;
-    logo?: {
-      asset?: SanityImageAssetReference;
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: 'image';
-    };
+    logo: string | null;
     h3?: string;
     details?: string;
     summary?: string;
-  };
+  } | null;
   contactSection?: {
     slug?: Slug;
     mainText?: string;
@@ -757,7 +729,7 @@ declare module '@sanity/client' {
     '*[_type=="contactPage"][0]{\ncontent\n}': ContactPageQueryResult;
     '*[_type=="galleryPage"][0]{\n  title,\n  catImages[]->{\n    "url": image.asset->url\n  }\n}': GetGalleryPageQueryResult;
     'count(*[_type=="galleryPage"][0].catImages)': GetGalleryCatImagesCountQueryResult;
-    '*[_type=="homePage"][0]{\n...\n}': GetHomePageQueryResult;
+    '*[_type=="homePage"][0]{\n  ...,\n  infoSection{\n    username,\n    linkedinLink,\n    jobTitle,\n    description,\n    "avatar": avatar.asset->url\n  },\n  aboutSection {\n  slug,\n   descriptionLeft,\n    descriptionRight,\n    "technologies": technologies[].asset->url\n  },\n  experienceSection {\n    slug,\n    "companies": companies[].asset->url,\n    projects[]->{\n      projectName,\n      projectDescription,\n      content\n    }\n  },\n  educationSection {\n    ...,\n    "logo": logo.asset->url,  \n  }\n}': GetHomePageQueryResult;
     '*[_type == "cardInfo" && slug.current == $cardSlug][0]{\n   name,\n   shortDescription,\n   amount,\n   rating,\n}': GetCardPageQueryResult;
     '*[_type=="cardsPage"][0]{\n h1,\n subText,\n "infoCards": infoCards[]->{\n   name,\n   shortDescription,\n   amount,\n   rating,\n   "slug": slug.current,\n }\n}\n': GetCardsPageDataQueryResult;
     'count(*[\n    _type == "customEvent" &&\n    (\n      $search == "*" ||\n      name match $search + "*" ||\n      description match $search + "*"\n    )\n  ])': TotalCountQueryResult;

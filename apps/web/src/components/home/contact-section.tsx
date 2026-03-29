@@ -2,32 +2,41 @@ import { Button } from '@/src/components/ui/button';
 import { GithubIcon, Linkedin } from 'lucide-react';
 import PhoneButton from '@/src/components/global/phone-button';
 import EmailButton from '@/src/components/global/email-button';
+import type { GetHomePageQueryResult } from '@/src/schema';
 
-export default function ContactSection() {
+type ContactSections = {
+  data:
+    | NonNullable<GetHomePageQueryResult>['contactSection']
+    | null
+    | undefined;
+};
+
+export default function ContactSection({ data }: ContactSections) {
+  if (!data) {
+    return null;
+  }
+
   return (
     <div>
       <h3 className="text-header mb-16 text-3xl font-semibold uppercase">
-        Contact
+        {data?.slug?.current}
       </h3>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-18">
         <div className="space-y-9">
-          <p className="text-[22px]">
-            Open to remote frontend opportunities and interested in building
-            modern, high-quality product experiences.
-          </p>
+          <p className="text-[22px]">{data?.mainText}</p>
 
           <div className="space-y-6">
-            <div className="text-2xl text-zinc-500">Ukraine, Kyiv</div>
+            <div className="text-2xl text-zinc-500">{data?.locationText}</div>
 
             <div className="flex gap-4">
-              <PhoneButton />
+              <PhoneButton number={data?.phoneNumber as string} />
 
-              <EmailButton />
+              <EmailButton email={data?.email as string} />
 
               <Button asChild variant="outline" className="text-header">
                 <a
-                  href="https://www.linkedin.com/in/mdbobskiy"
+                  href={data?.linkedinLink}
                   rel="noopener noreferrer"
                   target="_blank"
                 >
@@ -37,7 +46,7 @@ export default function ContactSection() {
 
               <Button asChild variant="outline" className="text-header">
                 <a
-                  href="https://github.com/jin-bob"
+                  href={data?.githubLink}
                   rel="noopener noreferrer"
                   target="_blank"
                 >

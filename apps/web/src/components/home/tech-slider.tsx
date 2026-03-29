@@ -1,15 +1,15 @@
 import Image from 'next/image';
 
-const images = [
-  '/images/technology-logos/react-logo.webp',
-  '/images/technology-logos/typescript-logo.webp',
-  '/images/technology-logos/next-logo.png',
-  '/images/technology-logos/tanstack-logo.png',
-  '/images/technology-logos/tailwind-logo.png',
-];
+type TechSliderProps = {
+  data: Array<string | null> | undefined | null;
+};
 
-export default function TechSlider() {
-  const duplicatedImages = [...images, ...images];
+export default function TechSlider({ data }: TechSliderProps) {
+  if (!data?.length) {
+    return null;
+  }
+
+  const duplicatedImages = [...data, ...data];
 
   return (
     <div className="group relative w-full overflow-hidden py-5">
@@ -23,7 +23,7 @@ export default function TechSlider() {
             className="h-[250px] w-[250px] flex-shrink-0 overflow-hidden rounded-2xl"
           >
             <Image
-              src={src}
+              src={src || ''}
               width={250}
               height={250}
               alt={`slide-${index}`}

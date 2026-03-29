@@ -13,24 +13,49 @@ export const metadata: Metadata = {
 };
 
 const getHomePageQuery = defineQuery(`*[_type=="homePage"][0]{
-...
+  ...,
+  infoSection{
+    username,
+    linkedinLink,
+    jobTitle,
+    description,
+    "avatar": avatar.asset->url
+  },
+  aboutSection {
+  slug,
+   descriptionLeft,
+    descriptionRight,
+    "technologies": technologies[].asset->url
+  },
+  experienceSection {
+    slug,
+    "companies": companies[].asset->url,
+    projects[]->{
+      projectName,
+      projectDescription,
+      content
+    }
+  },
+  educationSection {
+    ...,
+    "logo": logo.asset->url,  
+  }
 }`);
 
 export default async function Home() {
   const data = await client.fetch(getHomePageQuery);
 
-  console.log('data: ', data);
   return (
     <main className="mx-auto w-full max-w-[90rem] px-6 md:px-[60px] lg:px-[120px]">
-      <InfoSection />
+      <InfoSection data={data?.infoSection} />
 
-      <AboutSection />
+      <AboutSection data={data?.aboutSection} />
 
-      <ExperienceSection />
+      <ExperienceSection data={data?.experienceSection} />
 
-      <EducationSection />
+      <EducationSection data={data?.educationSection} />
 
-      <ContactSection />
+      <ContactSection data={data?.contactSection} />
     </main>
   );
 }

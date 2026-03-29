@@ -1,14 +1,15 @@
 import Image from 'next/image';
 
-const images = [
-  '/svg/futur.svg',
-  '/svg/mar.svg',
-  '/svg/marv.svg',
-  '/svg/shut.svg',
-];
+type CompanySliderProps = {
+  data: string[];
+};
 
-export default function CompanySlider() {
-  const duplicatedImages = [...images, ...images];
+export default function CompanySlider({ data }: CompanySliderProps) {
+  if (!data?.length) {
+    return null;
+  }
+
+  const duplicatedImages = [...data, ...data];
 
   return (
     <div className="group relative mt-16 w-full overflow-hidden py-5">

@@ -1231,13 +1231,6 @@
         },
         "optional": true
       },
-      "description": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
       "projectDescription": {
         "type": "objectAttribute",
         "value": {

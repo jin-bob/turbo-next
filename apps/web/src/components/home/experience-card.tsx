@@ -6,9 +6,9 @@ import {
 } from '@/src/components/ui/card';
 
 type ExperienceCardProps = {
-  projectName: string;
-  description: string;
-  content: string[];
+  projectName?: string;
+  description?: string;
+  content?: string[];
 };
 
 export default function ExperienceCard({
@@ -16,6 +16,10 @@ export default function ExperienceCard({
   description,
   projectName,
 }: ExperienceCardProps) {
+  if (!projectName) {
+    return null;
+  }
+
   return (
     <Card className="group transition-all duration-300 ease-out hover:scale-[1.05] hover:shadow-xl">
       <CardHeader className="text-3xl transition-colors duration-300">
@@ -28,7 +32,7 @@ export default function ExperienceCard({
 
       <CardContent>
         <ul className="">
-          {content.map((item, index) => (
+          {content?.map((item, index) => (
             <li
               key={index}
               className="transition-transform duration-300 group-hover:translate-x-1"
