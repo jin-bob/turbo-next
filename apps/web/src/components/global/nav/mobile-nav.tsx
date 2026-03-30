@@ -8,15 +8,10 @@ import { cn } from '@/src/lib/utils';
 import { navbarLinks } from '@/src/app/constants/navbar';
 import Logo from '@/src/components/global/logo';
 import { Button } from '@/src/components/ui/button';
-import useFirebaseAuth from '@/src/hooks/use-firebase-auth';
 
 export default function MobileNav() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const pathName = usePathname();
-
-  const { user } = useFirebaseAuth();
-
-  const text = user ? 'Dashboard' : 'Login';
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -74,7 +69,7 @@ export default function MobileNav() {
 
         <div className="flex w-full items-center justify-center">
           <Button asChild variant="default" className="px-[80px] py-6">
-            <Link href="/login">{text}</Link>
+            <Link href="/dashboard">Dashboard</Link>
           </Button>
         </div>
       </div>

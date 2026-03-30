@@ -18,13 +18,14 @@ const getCardsPageDataQuery = defineQuery(`*[_type=="cardsPage"][0]{
 export default async function CardsPage() {
   const data = await client.fetch(getCardsPageDataQuery);
 
-  console.log('data', data);
   return (
     <main className="w-full">
       <div className="space-y-3">
-        <h1 className="text-center text-2xl font-semibold">{data?.h1}</h1>
+        <h1 className="text-header mt-16 text-center text-4xl font-semibold">
+          {data?.h1}
+        </h1>
 
-        <h3 className="text-center text-base">{data?.subText}</h3>
+        <h3 className="text-center text-lg text-zinc-400">{data?.subText}</h3>
       </div>
 
       <List cards={data?.infoCards || []} />

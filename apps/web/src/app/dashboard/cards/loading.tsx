@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function CardsLoadingPage() {
   return (
-    <main className="w-full">
+    <main className="mt-16 w-full">
       <CardPageInfoSkeleton />
 
       <ListSkeleton />

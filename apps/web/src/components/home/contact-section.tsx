@@ -1,8 +1,6 @@
-import { Button } from '@/src/components/ui/button';
-import { GithubIcon, Linkedin } from 'lucide-react';
-import PhoneButton from '@/src/components/global/phone-button';
-import EmailButton from '@/src/components/global/email-button';
 import type { GetHomePageQueryResult } from '@/src/schema';
+import { GithubIcon, Linkedin, MailIcon, Phone } from 'lucide-react';
+import TelegramIcon from '@/src/components/global/icons/telegram-icon';
 
 type ContactSections = {
   data:
@@ -11,13 +9,18 @@ type ContactSections = {
     | undefined;
 };
 
+const linkCss =
+  'flex items-center justify-center gap-2 hover:underline hover:underline-offset-1 text-header';
+
+const linkIconCss = 'size-6 text-header';
+
 export default function ContactSection({ data }: ContactSections) {
   if (!data) {
     return null;
   }
 
   return (
-    <div>
+    <div className="mb-6 md:mb-16">
       <h3 className="text-header mb-16 text-3xl font-semibold uppercase">
         {data?.slug?.current}
       </h3>
@@ -26,60 +29,65 @@ export default function ContactSection({ data }: ContactSections) {
         <div className="space-y-9">
           <p className="text-[22px]">{data?.mainText}</p>
 
-          <div className="space-y-6">
-            <div className="text-2xl text-zinc-500">{data?.locationText}</div>
-
-            <div className="flex gap-4">
-              <PhoneButton number={data?.phoneNumber as string} />
-
-              <EmailButton email={data?.email as string} />
-
-              <Button asChild variant="outline" className="text-header">
-                <a
-                  href={data?.linkedinLink}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <Linkedin />
-                </a>
-              </Button>
-
-              <Button asChild variant="outline" className="text-header">
-                <a
-                  href={data?.githubLink}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <GithubIcon />
-                </a>
-              </Button>
-            </div>
-          </div>
+          <p className="text-foreground/35 text-[22px]">
+            If you have an opportunity, project, or collaboration in mind, I’d
+            be glad to connect.
+          </p>
         </div>
 
-        <div>
-          <form className="space-y-8">
-            <div className="flex w-full items-center justify-between gap-2">
-              <input
-                type="text"
-                placeholder="Name"
-                className="border-foreground w-full min-w-0 rounded-md border px-4 py-2"
-              />
+        <div className="flex flex-col items-start justify-between gap-4">
+          <div className="flex items-center justify-center gap-2">
+            <Phone className={linkIconCss} />
 
-              <input
-                type="text"
-                placeholder="Email"
-                className="border-foreground w-full min-w-0 rounded-md border px-4 py-2"
-              />
+            <div className="text-foreground/60">{data?.phoneNumber}</div>
+          </div>
+
+          <div className="flex items-center justify-center gap-2">
+            <MailIcon className={linkIconCss} />
+
+            <div className="text-foreground/60">{data?.email}</div>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            <a
+              href={data?.linkedinLink}
+              rel="noopener noreferrer"
+              target="_blank"
+              className={linkCss}
+            >
+              <Linkedin className={linkIconCss} />
+
+              <div>LinkedIn</div>
+            </a>
+
+            <a
+              href={data?.githubLink}
+              rel="noopener noreferrer"
+              target="_blank"
+              className={linkCss}
+            >
+              <GithubIcon className={linkIconCss} />
+
+              <div>GitHub</div>
+            </a>
+
+            <a
+              href="https://t.me/mdbobskiy"
+              target="_blank"
+              rel="noreferrer noopener"
+              className={linkCss}
+            >
+              <TelegramIcon className={linkIconCss} />
+
+              <div>Telegram</div>
+            </a>
+          </div>
+
+          <div className="space-y-6">
+            <div className="text-foreground/35 text-2xl">
+              {data?.locationText}
             </div>
-
-            <textarea
-              placeholder="Message"
-              className="border-foreground h-[calc(0.25rem*38)] min-h-16 w-full resize-none rounded-md border px-4 py-2"
-            />
-
-            <Button>Send</Button>
-          </form>
+          </div>
         </div>
       </div>
     </div>

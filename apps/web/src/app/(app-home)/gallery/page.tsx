@@ -30,7 +30,7 @@ export default async function GalleryPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-16 text-center">
-      <h1 className="mb-8 text-2xl font-semibold">{data?.title}</h1>
+      <h1 className="text-header mb-8 text-5xl font-semibold">{data?.title}</h1>
 
       <div className="mobsm:grid-cols-2 grid auto-rows-[200px] grid-cols-1 gap-4 md:grid-cols-4">
         {data?.catImages?.map((img, index) => {

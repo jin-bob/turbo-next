@@ -7,6 +7,8 @@ import InfoSection from '@/src/components/home/info-section';
 import AboutSection from '@/src/components/home/about-section';
 import { client } from '@/src/lib/sanity/client';
 
+export const dynamic = 'force-static';
+
 export const metadata: Metadata = {
   title: 'Home Page',
   description: 'Created by Yevhenii Bober, Software Developer',

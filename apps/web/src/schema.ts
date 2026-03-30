@@ -685,7 +685,7 @@ export type GetCardsPageDataQueryResult = {
   }> | null;
 } | null;
 
-// Source: ../web/src/app/dashboard/table/page.tsx
+// Source: ../web/src/app/dashboard/page.tsx
 // Variable: totalCountQuery
 // Query: count(*[    _type == "customEvent" &&    (      $search == "*" ||      name match $search + "*" ||      description match $search + "*"    )  ])
 export type TotalCountQueryResult = number;

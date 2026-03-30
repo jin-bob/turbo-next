@@ -4,9 +4,9 @@ import { Skeleton } from '@/src/components/ui/skeleton';
 export function CardPageInfoSkeleton() {
   return (
     <div className="space-y-3">
-      <Skeleton className="mx-auto mb-4 h-8 w-64" />
+      <Skeleton className="mx-auto mb-4 h-10 w-64" />
 
-      <Skeleton className="mx-auto h-6 w-24" />
+      <Skeleton className="mx-auto h-7 w-24" />
     </div>
   );
 }
