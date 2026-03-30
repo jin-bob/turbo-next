@@ -690,23 +690,6 @@ export type GetCardsPageDataQueryResult = {
 // Query: count(*[    _type == "customEvent" &&    (      $search == "*" ||      name match $search + "*" ||      description match $search + "*"    )  ])
 export type TotalCountQueryResult = number;
 
-// Source: ../web/src/components/dashboard/dashboard-root/info-section.tsx
-// Variable: getInfoSectionQuery
-// Query: *[_type=="dashboardPage"][0]{  h1,  subText,  detailInfo,  "avatar":avatar.asset->url}
-export type GetInfoSectionQueryResult = {
-  h1: string | null;
-  subText: string | null;
-  detailInfo: Array<string> | null;
-  avatar: string | null;
-} | null;
-
-// Source: ../web/src/components/dashboard/dashboard-root/projects-section/project-section.tsx
-// Variable: getProjectsSectionQuery
-// Query: *[_type=="dashboardPage"][0]{ cardsTitle,}
-export type GetProjectsSectionQueryResult = {
-  cardsTitle: string | null;
-} | null;
-
 // Source: ../web/src/components/dashboard/table/table.tsx
 // Variable: getCustomEventsQuery
 // Query: *[_type == "customEvent" &&    (      $search == "*" ||      name match $search + "*" ||      description match $search + "*"    )][$start...$end]{    "slug": slug.current,    name,    description,    startDate,    endDate,    categories,    status,    type,}
@@ -733,8 +716,6 @@ declare module '@sanity/client' {
     '*[_type == "cardInfo" && slug.current == $cardSlug][0]{\n   name,\n   shortDescription,\n   amount,\n   rating,\n}': GetCardPageQueryResult;
     '*[_type=="cardsPage"][0]{\n h1,\n subText,\n "infoCards": infoCards[]->{\n   name,\n   shortDescription,\n   amount,\n   rating,\n   "slug": slug.current,\n }\n}\n': GetCardsPageDataQueryResult;
     'count(*[\n    _type == "customEvent" &&\n    (\n      $search == "*" ||\n      name match $search + "*" ||\n      description match $search + "*"\n    )\n  ])': TotalCountQueryResult;
-    '*[_type=="dashboardPage"][0]{\n  h1,\n  subText,\n  detailInfo,\n  "avatar":avatar.asset->url\n}\n': GetInfoSectionQueryResult;
-    '*[_type=="dashboardPage"][0]{\n cardsTitle,\n}': GetProjectsSectionQueryResult;
     '*[_type == "customEvent" &&\n    (\n      $search == "*" ||\n      name match $search + "*" ||\n      description match $search + "*"\n    )][$start...$end]{\n    "slug": slug.current,\n    name,\n    description,\n    startDate,\n    endDate,\n    categories,\n    status,\n    type,\n}\n': GetCustomEventsQueryResult;
   }
 }
