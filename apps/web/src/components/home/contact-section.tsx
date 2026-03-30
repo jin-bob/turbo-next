@@ -84,7 +84,7 @@ export default function ContactSection({ data }: ContactSections) {
           </div>
 
           <div className="space-y-6">
-            <div className="text-foreground/35 text-2xl">
+            <div className="text-foreground/35 text-[22px]">
               {data?.locationText}
             </div>
           </div>
