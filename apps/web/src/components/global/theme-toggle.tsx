@@ -1,9 +1,8 @@
 'use client';
 
 import { Moon, Sun } from 'lucide-react';
-import { Button } from '@/src/components/ui/button';
 import { useTheme } from '@/src/context/theme-context';
-import { cn } from '@/src/lib/utils';
+import { SidebarMenuButton } from '@/src/components/ui/sidebar';
 
 type ThemeToggleProps = {
   className?: string;
@@ -14,11 +13,7 @@ export default function ThemeToggle({ className, text }: ThemeToggleProps) {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <Button
-      variant="link"
-      className={cn('text-white', className)}
-      onClick={toggleTheme}
-    >
+    <SidebarMenuButton content={className} onClick={toggleTheme}>
       {theme === 'light' ? (
         <Sun className="size-4" />
       ) : (
@@ -26,6 +21,6 @@ export default function ThemeToggle({ className, text }: ThemeToggleProps) {
       )}
 
       {!!text && <span>{text}</span>}
-    </Button>
+    </SidebarMenuButton>
   );
 }

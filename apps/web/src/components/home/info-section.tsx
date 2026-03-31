@@ -13,7 +13,7 @@ export default function InfoSection({ data }: InfoSectionProps) {
   if (!data) return null;
 
   return (
-    <section className="mt-6 w-full rounded-3xl border-zinc-200 bg-white shadow-sm md:mt-16">
+    <section className="bg-background mt-6 w-full rounded-3xl border-zinc-200 shadow-sm md:mt-16">
       <Image
         height={180}
         width={1200}

@@ -1,7 +1,6 @@
 import {
   SidebarGroup,
   SidebarMenu,
-  SidebarMenuButton,
   SidebarMenuItem,
 } from '@/src/components/ui/sidebar';
 import LogoutButton from '@/src/components/global/logout-button';
@@ -12,18 +11,14 @@ export default function FooterMenu() {
     <SidebarGroup>
       <SidebarMenu>
         <SidebarMenuItem>
-          <SidebarMenuButton asChild>
-            <ThemeToggle
-              className="text-foreground justify-start !no-underline"
-              text="Theme"
-            />
-          </SidebarMenuButton>
+          <ThemeToggle
+            className="text-foreground justify-start !no-underline"
+            text="Theme"
+          />
         </SidebarMenuItem>
 
         <SidebarMenuItem>
-          <SidebarMenuButton asChild>
-            <LogoutButton />
-          </SidebarMenuButton>
+          <LogoutButton />
         </SidebarMenuItem>
       </SidebarMenu>
     </SidebarGroup>
