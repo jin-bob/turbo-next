@@ -24,8 +24,22 @@ export default function MobileNav() {
 
     handleResize();
 
-    return () => window.removeEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
+
+  useEffect(() => {
+    const rootOverflow = document.body.style.overflow;
+
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      document.body.style.overflow = rootOverflow;
+    };
+  }, [isOpen]);
 
   return (
     <nav className="bg-header sticky top-0 z-20 flex w-full items-center justify-between gap-2 px-6 py-2 md:hidden">
@@ -45,7 +59,7 @@ export default function MobileNav() {
 
       <div
         className={cn(
-          'bg-background fixed top-[64px] bottom-0 left-0 w-full transform flex-col gap-4 px-4 py-3 transition-all duration-300 ease-in-out',
+          'bg-background fixed top-[48px] bottom-0 left-0 w-full transform flex-col gap-4 px-4 py-3 transition-all duration-300 ease-in-out',
           isOpen
             ? 'pointer-events-auto translate-y-0 opacity-100'
             : 'pointer-events-none translate-y-[-100%] opacity-0',
@@ -54,11 +68,12 @@ export default function MobileNav() {
         <div className="flex flex-col items-start gap-4">
           {navbarLinks.map((link) => (
             <Link
+              onClick={() => setIsOpen((prev) => !prev)}
               href={link.href}
               key={link.href}
               className={cn(
-                'font-semibold transition-opacity duration-300',
-                pathName === link.href ? 'text-blue-500' : 'text-foreground',
+                'hover:header font-semibold transition-opacity duration-300',
+                pathName === link.href ? 'text-header' : 'text-foreground',
                 isOpen ? 'opacity-100 delay-[50ms]' : 'opacity-0',
               )}
             >
