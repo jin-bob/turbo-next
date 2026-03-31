@@ -4,14 +4,15 @@ import {
   SidebarMenuItem,
 } from '@/src/components/ui/sidebar';
 import LogoutButton from '@/src/components/global/logout-button';
-import ThemeToggle from '@/src/components/global/theme-toggle';
+import ThemeSwitcher from '@/src/components/global/theme-switcher';
 
 export default function FooterMenu() {
   return (
     <SidebarGroup>
       <SidebarMenu>
         <SidebarMenuItem>
-          <ThemeToggle
+          <ThemeSwitcher
+            isSidebar
             className="text-foreground justify-start !no-underline"
             text="Theme"
           />

@@ -9,6 +9,7 @@ import {
 } from '@/src/components/ui/sidebar';
 import AppSidebar from '@/src/components/dashboard/app-sidebar/app-sidebar';
 import MobileNav from '@/src/components/dashboard/mobile-nav/mobile-nav';
+import MobileHeader from '@/src/components/dashboard/mobile-header';
 
 export const metadata: Metadata = {
   robots: 'noindex, nofollow',
@@ -32,6 +33,8 @@ export default async function Layout({ children }: { children: ReactNode }) {
       <SidebarInset className="mobsm:mb-[86px] relative mb-[66px] w-full p-3 md:w-[calc(100dvw-var(--sidebar-width)-16px)] md:px-5 md:pb-5">
         {children}
       </SidebarInset>
+
+      <MobileHeader />
 
       <MobileNav />
     </SidebarProvider>
