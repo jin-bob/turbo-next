@@ -43,7 +43,7 @@ export default async function Dashboard(props: TablePageProps) {
   const end = start + PAGE_SIZE;
 
   return (
-    <div className="mx-auto flex w-full flex-col items-center justify-start gap-4">
+    <main className="mx-auto flex w-full flex-col items-center justify-start gap-4">
       <div className="text-header mt-16 text-center text-4xl font-semibold">
         Example of React Table with Search and Pagination
       </div>
@@ -56,6 +56,6 @@ export default async function Dashboard(props: TablePageProps) {
           search={searchValue}
         />
       </Suspense>
-    </div>
+    </main>
   );
 }
