@@ -15,7 +15,7 @@ export default function FooterLink({
   return (
     <Link
       className={cn(
-        'text-base leading-6 text-white hover:underline hover:underline-offset-1',
+        'dark:text-foreground text-base leading-6 text-white hover:underline hover:underline-offset-1',
         variant === 'small' && 'text-xs leading-5',
       )}
       href={href}

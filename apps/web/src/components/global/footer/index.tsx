@@ -6,14 +6,16 @@ import FooterLink from '@/src/components/global/footer/footer-link';
 
 const YEAR = new Date().getFullYear();
 
+const linkCss = 'dark:text-foreground size-[24px] text-white';
+
 export default function Footer() {
   return (
     <footer className="bg-header bottom-0 mt-3 flex w-full">
-      <div className="mx-auto box-border flex w-full max-w-[90rem] flex-col items-start justify-center gap-4 p-6 text-white md:gap-8 md:px-[120px] md:pt-6 md:pb-6">
+      <div className="dark:text-foreground mx-auto box-border flex w-full max-w-[90rem] flex-col items-start justify-center gap-4 p-6 text-white md:gap-8 md:px-[120px] md:pt-6 md:pb-6">
         <div className="flex w-full items-center justify-between">
           <div className="flex gap-2">
             <Link href={'/'}>
-              <Logo />
+              <Logo className="dark:text-foreground" />
             </Link>
           </div>
 
@@ -26,7 +28,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noreferrer noopener"
               >
-                <Linkedin className="size-[24px]" />
+                <Linkedin className={linkCss} />
               </a>
 
               <a
@@ -34,7 +36,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noreferrer noopener"
               >
-                <GithubIcon className="size-[24px]" />
+                <GithubIcon className={linkCss} />
               </a>
 
               <a
@@ -42,7 +44,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noreferrer noopener"
               >
-                <TelegramIcon className="size-[24px]" />
+                <TelegramIcon className={linkCss} />
               </a>
             </div>
           </div>
@@ -53,12 +55,14 @@ export default function Footer() {
 
           <FooterLink href="/experience">Experience</FooterLink>
 
-          <FooterLink href="/contant">Contact</FooterLink>
+          <FooterLink href="/contact">Contact</FooterLink>
         </div>
 
         <div className="border-background/40 w-full border-t pt-8 md:flex md:items-center md:justify-between">
           <div className="flex items-center gap-4">
-            <p className="text-xs leading-5 text-white">&copy; {YEAR} Recall</p>
+            <p className="dark:text-foreground text-xs leading-5 text-white">
+              &copy; {YEAR} Recall
+            </p>
 
             <FooterLink href="/terms" variant="small">
               Terms of Service

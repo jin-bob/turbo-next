@@ -30,7 +30,7 @@ export default function MobileNav() {
   return (
     <nav className="bg-header sticky top-0 z-20 flex w-full items-center justify-between gap-2 px-6 py-2 md:hidden">
       <Link href="/">
-        <Logo />
+        <Logo className="dark:text-foreground" />
       </Link>
 
       <button

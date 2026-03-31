@@ -18,7 +18,7 @@ export default function FooterMenu() {
         </SidebarMenuItem>
 
         <SidebarMenuItem>
-          <LogoutButton />
+          <LogoutButton className="dark:text-foreground" />
         </SidebarMenuItem>
       </SidebarMenu>
     </SidebarGroup>

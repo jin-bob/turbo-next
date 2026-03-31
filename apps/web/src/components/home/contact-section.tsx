@@ -29,22 +29,22 @@ export default function ContactSection({ data }: ContactSections) {
         <div className="space-y-9">
           <p className="text-[22px]">{data?.mainText}</p>
 
-          <p className="text-foreground/35 text-[22px]">
+          <p className="text-foreground/35 dark:text-foreground text-[22px]">
             {data?.additionalText}
           </p>
         </div>
 
-        <div className="flex flex-col items-start justify-between gap-4">
+        <div className="text-foreground/60 dark:text-foreground flex flex-col items-start justify-between gap-4">
           <div className="flex items-center justify-center gap-2">
             <Phone className={linkIconCss} />
 
-            <div className="text-foreground/60">{data?.phoneNumber}</div>
+            <div>{data?.phoneNumber}</div>
           </div>
 
           <div className="flex items-center justify-center gap-2">
             <MailIcon className={linkIconCss} />
 
-            <div className="text-foreground/60">{data?.email}</div>
+            <div>{data?.email}</div>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-2">
@@ -83,7 +83,7 @@ export default function ContactSection({ data }: ContactSections) {
           </div>
 
           <div className="space-y-6">
-            <div className="text-foreground/35 text-[22px]">
+            <div className="text-foreground/35 dark:text-foreground text-[22px]">
               {data?.locationText}
             </div>
           </div>

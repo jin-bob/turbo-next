@@ -25,7 +25,9 @@ export default async function CardsPage() {
           {data?.h1}
         </h1>
 
-        <h3 className="text-center text-lg text-zinc-400">{data?.subText}</h3>
+        <h3 className="text-center text-lg text-zinc-400 dark:text-zinc-300">
+          {data?.subText}
+        </h3>
       </div>
 
       <List cards={data?.infoCards || []} />

@@ -44,7 +44,7 @@ export default function EducationSection({ data }: EducationSectionProps) {
             height={313}
           />
 
-          <div className="mobsm:text-start relative z-10 space-y-3 text-center text-white">
+          <div className="mobsm:text-start dark:!text-foreground relative z-10 space-y-3 text-center text-white">
             <h3 className="text-xl md:text-2xl lg:text-4xl">{data?.h3}</h3>
 
             <p className="text-2sm">{data?.details}</p>

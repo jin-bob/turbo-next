@@ -25,7 +25,7 @@ export default function AboutSection({ data }: AboutSectionProps) {
         </div>
 
         <div className="flex-1">
-          <div className="text-lg/[22px] font-light">
+          <div className="text-foreground text-lg/[22px] font-light">
             <PortableText
               value={data?.descriptionRight ? data.descriptionRight : []}
               components={simpleComponent}
