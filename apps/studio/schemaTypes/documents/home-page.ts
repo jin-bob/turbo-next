@@ -26,6 +26,11 @@ export const homePage = defineType({
           type: 'image',
         }),
         defineField({
+          name: 'bgImage',
+          title: 'Background Image',
+          type: 'image',
+        }),
+        defineField({
           name: 'username',
           title: 'Username',
           type: 'string',
@@ -36,10 +41,54 @@ export const homePage = defineType({
           type: 'string',
         }),
         defineField({
+          name: 'location',
+          title: 'Location',
+          type: 'string',
+        }),
+        defineField({
+          name: 'status',
+          title: 'Status',
+          type: 'string',
+        }),
+        defineField({
           name: 'description',
           title: 'Description',
           type: 'array',
           of: [{type: 'block'}],
+        }),
+        defineField({
+          name: 'experience',
+          title: 'Experience',
+          type: 'array',
+          of: [
+            {
+              type: 'object',
+              name: 'job',
+              title: 'Job',
+              fields: [
+                defineField({
+                  name: 'slug',
+                  title: 'Slug',
+                  type: 'slug',
+                }),
+                defineField({
+                  name: 'name',
+                  title: 'Name',
+                  type: 'string',
+                }),
+                defineField({
+                  name: 'description',
+                  title: 'Description',
+                  type: 'string',
+                }),
+                defineField({
+                  name: 'logo',
+                  title: 'Logo',
+                  type: 'image',
+                }),
+              ],
+            },
+          ],
         }),
       ],
     }),
@@ -151,6 +200,11 @@ export const homePage = defineType({
           type: 'text',
         }),
         defineField({
+          name: 'additionalText',
+          title: 'Additional Text',
+          type: 'text',
+        }),
+        defineField({
           name: 'locationText',
           title: 'Location Text',
           type: 'string',
@@ -174,6 +228,11 @@ export const homePage = defineType({
         defineField({
           name: 'githubLink',
           title: 'Github',
+          type: 'url',
+        }),
+        defineField({
+          name: 'telegramLink',
+          title: 'Telegram',
           type: 'url',
         }),
       ],
