@@ -1,6 +1,6 @@
-import TechSlider from '@/src/components/home/tech-slider';
 import type { GetHomePageQueryResult } from '@/src/schema';
 import { simpleComponent } from '@/src/components/global/simple-components';
+import ImageSlider from '@/src/components/global/image-slider';
 import { PortableText } from '@portabletext/react';
 
 type AboutSectionProps = {
@@ -34,7 +34,12 @@ export default function AboutSection({ data }: AboutSectionProps) {
         </div>
       </div>
 
-      <TechSlider data={data.technologies} />
+      <ImageSlider
+        data={data.technologies}
+        imageHeight={250}
+        imageWidth={250}
+        className="[&_img]:rounded-2xl"
+      />
     </section>
   );
 }

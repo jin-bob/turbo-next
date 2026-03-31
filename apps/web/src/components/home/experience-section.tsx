@@ -1,6 +1,6 @@
 import ExperienceCard from '@/src/components/home/experience-card';
-import CompanySlider from '@/src/components/home/company-slider';
 import type { GetHomePageQueryResult } from '@/src/schema';
+import ImageSlider from '@/src/components/global/image-slider';
 
 type ExperienceSectionProps = {
   data:
@@ -29,7 +29,13 @@ export default function ExperienceSection({ data }: ExperienceSectionProps) {
         ))}
       </div>
 
-      <CompanySlider data={data?.companies as string[]} />
+      <ImageSlider
+        data={data?.companies as string[]}
+        imageWidth={250}
+        imageHeight={50}
+        rotationFrom="right"
+        className="mt-16"
+      />
     </section>
   );
 }
