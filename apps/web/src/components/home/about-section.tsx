@@ -11,7 +11,7 @@ export default function AboutSection({ data }: AboutSectionProps) {
   if (!data) return null;
 
   return (
-    <section className="mt-16 space-y-16">
+    <section className="mt-16 mb-16 space-y-16">
       <h3 className="text-header text-3xl font-semibold uppercase">
         {data.slug?.current || ''}
       </h3>

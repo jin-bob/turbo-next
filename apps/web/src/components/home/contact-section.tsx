@@ -20,7 +20,7 @@ export default function ContactSection({ data }: ContactSections) {
   }
 
   return (
-    <div className="mb-6 md:mb-16">
+    <div className="mt-16 mb-6 md:mb-16">
       <h3 className="text-header mb-16 text-3xl font-semibold uppercase">
         {data?.slug?.current}
       </h3>

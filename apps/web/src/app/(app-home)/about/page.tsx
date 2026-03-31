@@ -1,29 +1,48 @@
-import { Metadata } from 'next';
+import InfoSection from '@/src/components/home/info-section';
+import type { Metadata } from 'next';
 import { defineQuery } from 'next-sanity';
-import { PortableText } from '@portabletext/react';
-import { simpleComponent } from '@/src/components/global/simple-components';
 import { client } from '@/src/lib/sanity/client';
+import AboutSection from '@/src/components/home/about-section';
 
 export const dynamic = 'force-static';
 
 export const metadata: Metadata = {
-  title: 'About',
-  description: 'Learn more about our project, its goals, and how it was built.',
+  title: 'About Page',
+  description: 'Created by Yevhenii Bober, Software Developer',
 };
 
-const getAboutPageContent = defineQuery(`*[_type=="aboutPage"][0]{
-content
+const getAboutPageQuery = defineQuery(`*[_type=="homePage"][0]{
+   infoSection {
+    username,
+    linkedinLink,
+    jobTitle,
+    location,
+    status,
+    description,
+    experience[] {
+      name,
+      description,
+      "logo": logo.asset->url
+    },
+    "avatar": avatar.asset->url,
+    "background": bgImage.asset->url
+  },
+  aboutSection {
+    slug,
+    descriptionLeft,
+    descriptionRight,
+    "technologies": technologies[].asset->url
+  }
 }`);
 
-export default async function AboutPage() {
-  const data = await client.fetch(getAboutPageContent);
+export default async function AboutUsPage() {
+  const data = await client.fetch(getAboutPageQuery);
 
   return (
-    <div className="prose prose-neutral dark:prose-invert mx-auto max-w-4xl px-6 py-16">
-      <PortableText
-        value={data?.content ? data.content : []}
-        components={simpleComponent}
-      />
-    </div>
+    <>
+      <InfoSection data={data?.infoSection} />
+      
+      <AboutSection data={data?.aboutSection} />
+    </>
   );
 }

@@ -60,7 +60,7 @@ export default function Footer() {
           <div className="flex items-center gap-4">
             <p className="text-xs leading-5 text-white">&copy; {YEAR} Recall</p>
 
-            <FooterLink href="/terms-of-service" variant="small">
+            <FooterLink href="/terms" variant="small">
               Terms of Service
             </FooterLink>
 

@@ -56,7 +56,7 @@ export default async function Home() {
   const data = await client.fetch(getHomePageQuery);
 
   return (
-    <main className="mx-auto w-full max-w-[90rem] px-6 md:px-[60px] lg:px-[120px]">
+    <>
       <InfoSection data={data?.infoSection} />
 
       <AboutSection data={data?.aboutSection} />
@@ -66,6 +66,6 @@ export default async function Home() {
       <EducationSection data={data?.educationSection} />
 
       <ContactSection data={data?.contactSection} />
-    </main>
+    </>
   );
 }

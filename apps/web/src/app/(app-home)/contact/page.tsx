@@ -1,29 +1,23 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { defineQuery } from 'next-sanity';
-import { PortableText } from '@portabletext/react';
-import { simpleComponent } from '@/src/components/global/simple-components';
 import { client } from '@/src/lib/sanity/client';
+import ContactSection from '@/src/components/home/contact-section';
 
 export const dynamic = 'force-static';
 
 export const metadata: Metadata = {
-  title: 'Contact',
-  description: 'Some Contact Information',
+  title: 'Contact Page',
+  description: 'Created by Yevhenii Bober, Software Developer',
 };
 
-const contactPageQuery = defineQuery(`*[_type=="contactPage"][0]{
-content
+const getContactPageQuery = defineQuery(`*[_type=="homePage"][0]{
+   contactSection {
+    ...
+  },
 }`);
 
 export default async function ContactPage() {
-  const data = await client.fetch(contactPageQuery);
+  const data = await client.fetch(getContactPageQuery);
 
-  return (
-    <div className="prose prose-neutral dark:prose-invert mx-auto max-w-4xl px-6 py-16">
-      <PortableText
-        value={data?.content ? data.content : []}
-        components={simpleComponent}
-      />
-    </div>
-  );
+  return <ContactSection data={data?.contactSection} />;
 }
