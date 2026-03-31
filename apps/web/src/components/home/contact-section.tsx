@@ -30,8 +30,7 @@ export default function ContactSection({ data }: ContactSections) {
           <p className="text-[22px]">{data?.mainText}</p>
 
           <p className="text-foreground/35 text-[22px]">
-            If you have an opportunity, project, or collaboration in mind, I’d
-            be glad to connect.
+            {data?.additionalText}
           </p>
         </div>
 
@@ -72,7 +71,7 @@ export default function ContactSection({ data }: ContactSections) {
             </a>
 
             <a
-              href="https://t.me/mdbobskiy"
+              href={data?.telegramLink}
               target="_blank"
               rel="noreferrer noopener"
               className={linkCss}

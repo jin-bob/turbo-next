@@ -20,8 +20,16 @@ const getHomePageQuery = defineQuery(`*[_type=="homePage"][0]{
     username,
     linkedinLink,
     jobTitle,
+    location,
+    status,
     description,
-    "avatar": avatar.asset->url
+    experience[] {
+      name,
+      description,
+      "logo": logo.asset->url
+    },
+    "avatar": avatar.asset->url,
+    "background": bgImage.asset->url
   },
   aboutSection {
   slug,
