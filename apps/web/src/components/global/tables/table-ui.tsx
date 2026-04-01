@@ -49,7 +49,6 @@ export default function TableUI<TData extends RowData>({
         data,
       });
 
-    console.log('aboba');
     tableData = clientTableData;
     tableColumns = clientTableColumns;
   }

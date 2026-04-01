@@ -1,7 +1,8 @@
 'use client';
 
-import { cn } from '@/src/lib/utils';
+import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
+import { cn } from '@/src/lib/utils';
 
 type PaginationProps = {
   totalPages: number;
@@ -23,13 +24,14 @@ export default function Pagination({ totalPages }: PaginationProps) {
 
   return (
     <div className="flex justify-between gap-4">
-      <a
+      <Link
         href={createPageURL(currentPage - 1)}
         className={`rounded border px-3 py-1 ${currentPage <= 1 ? 'pointer-events-none opacity-50' : ''}`}
       >
         Prev
-      </a>
-      <a
+      </Link>
+
+      <Link
         href={createPageURL(currentPage + 1)}
         className={cn(
           'rounded border px-3 py-1',
@@ -37,7 +39,7 @@ export default function Pagination({ totalPages }: PaginationProps) {
         )}
       >
         Next
-      </a>
+      </Link>
     </div>
   );
 }

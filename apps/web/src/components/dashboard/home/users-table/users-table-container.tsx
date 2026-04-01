@@ -15,7 +15,7 @@ export default function UsersTableContainer() {
   const { data, isLoading, error } = useQuery(
     createUsersQueryOptions({
       params: {
-        p: (currentPage - 1).toString(),
+        p: (currentPage === 0 ? currentPage : currentPage - 1).toString(),
         pp: '10',
         q: undefined,
         sb: undefined,

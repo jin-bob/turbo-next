@@ -1,4 +1,3 @@
-import QueryProvider from '@/src/app/dashboard/query-provider';
 import UsersTableContainer from '@/src/components/dashboard/home/users-table/users-table-container';
 
 export default function DashboardPage() {
@@ -8,9 +7,7 @@ export default function DashboardPage() {
         Users Table
       </div>
 
-      <QueryProvider>
-        <UsersTableContainer />
-      </QueryProvider>
+      <UsersTableContainer />
     </div>
   );
 }
