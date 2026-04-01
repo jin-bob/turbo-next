@@ -24,7 +24,7 @@ export default function AppSidebarMenu() {
                 isActive={getIsActivePathname({ pathName, to: item.to })}
                 asChild
               >
-                <span>
+                <span className="dark:text-foreground">
                   {!!item.icon && <item.icon />}
 
                   <span>{item.title}</span>

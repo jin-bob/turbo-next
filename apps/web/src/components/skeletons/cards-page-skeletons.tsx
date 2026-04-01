@@ -4,9 +4,9 @@ import { Skeleton } from '@/src/components/ui/skeleton';
 export function CardPageInfoSkeleton() {
   return (
     <div className="space-y-3">
-      <Skeleton className="mx-auto mb-4 h-8 w-64" />
+      <Skeleton className="mx-auto mb-4 h-10 w-64" />
 
-      <Skeleton className="mx-auto h-6 w-24" />
+      <Skeleton className="mx-auto h-7 w-24" />
     </div>
   );
 }
@@ -38,7 +38,7 @@ function ListCardSkeleton() {
 export function ListSkeleton() {
   return (
     <div className="flex flex-col gap-8">
-      <div className="grid w-full auto-rows-auto grid-cols-1 justify-items-center gap-[24px] px-[15px] pt-2.5 min-[1100px]:grid-cols-3 md:grid-cols-2">
+      <div className="grid w-full auto-rows-auto grid-cols-1 justify-items-center gap-6 px-[15px] pt-2.5 md:grid-cols-2 lg:grid-cols-3">
         {Array.from({ length: 6 }).map((_, index) => (
           <ListCardSkeleton key={index} />
         ))}

@@ -6,6 +6,6 @@ export type NavLink = {
 export const navbarLinks: Array<NavLink> = [
   { href: '/', text: 'Home' },
   { href: '/about', text: 'About' },
+  { href: '/experience', text: 'Experience' },
   { href: '/contact', text: 'Contact' },
-  { href: '/gallery', text: 'Gallery' },
 ];

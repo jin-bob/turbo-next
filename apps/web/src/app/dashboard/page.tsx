@@ -1,26 +1,13 @@
-import { Suspense } from 'react';
-import { Metadata } from 'next';
-import InfoSection from '@/src/components/dashboard/dashboard-root/info-section';
-import ProjectsSection from '@/src/components/dashboard/dashboard-root/projects-section/project-section';
-import {
-  InfoSectionSkeleton,
-  ProjectsSectionSkeleton,
-} from '@/src/components/skeletons/dashboard-skeletons';
+import UsersTableContainer from '@/src/components/dashboard/home/users-table/users-table-container';
 
-export const metadata: Metadata = {
-  title: 'Dashboard',
-};
-
-export default async function DashboardPage() {
+export default function DashboardPage() {
   return (
-    <main className="flex-1 space-y-8 px-6 py-4">
-      <Suspense fallback={<InfoSectionSkeleton />}>
-        <InfoSection />
-      </Suspense>
+    <div className="mx-auto flex w-full flex-col items-center justify-start gap-4">
+      <div className="text-header mt-16 mb-8 text-center text-4xl font-semibold">
+        Users Table
+      </div>
 
-      <Suspense fallback={<ProjectsSectionSkeleton />}>
-        <ProjectsSection />
-      </Suspense>
-    </main>
+      <UsersTableContainer />
+    </div>
   );
 }

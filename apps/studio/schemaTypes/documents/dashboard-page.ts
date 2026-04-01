@@ -31,11 +31,5 @@ export const dashboardPage = defineType({
       type: 'text',
       title: 'Cards Title',
     }),
-    defineField({
-      name: 'cards',
-      title: 'Project Cards',
-      type: 'array',
-      of: [{type: 'reference', to: {type: 'projectInfo'}}],
-    }),
   ],
 })

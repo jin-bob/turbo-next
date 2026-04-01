@@ -1,29 +1,25 @@
 import {
   SidebarGroup,
   SidebarMenu,
-  SidebarMenuButton,
   SidebarMenuItem,
 } from '@/src/components/ui/sidebar';
 import LogoutButton from '@/src/components/global/logout-button';
-import ThemeToggle from '@/src/components/global/theme-toggle';
+import ThemeSwitcher from '@/src/components/global/theme-switcher';
 
 export default function FooterMenu() {
   return (
     <SidebarGroup>
       <SidebarMenu>
         <SidebarMenuItem>
-          <SidebarMenuButton asChild>
-            <ThemeToggle
-              className="text-foreground justify-start !no-underline"
-              text="Theme"
-            />
-          </SidebarMenuButton>
+          <ThemeSwitcher
+            isSidebar
+            className="text-foreground justify-start !no-underline"
+            text="Theme"
+          />
         </SidebarMenuItem>
 
         <SidebarMenuItem>
-          <SidebarMenuButton asChild>
-            <LogoutButton />
-          </SidebarMenuButton>
+          <LogoutButton className="dark:text-foreground" />
         </SidebarMenuItem>
       </SidebarMenu>
     </SidebarGroup>

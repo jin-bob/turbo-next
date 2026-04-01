@@ -2,38 +2,36 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { NAV_BASE, NAV_ITEMS } from '@/src/constants/nav';
-import { Button } from '@/src/components/ui/button';
-import { cn } from '@/src/lib/utils';
+import { MOBILE_NAV_ITEMS, NAV_BASE } from '@/src/constants/nav';
 import getIsActivePathname from '@/src/helpers/get-is-active-pathname';
+import { cn } from '@/src/lib/utils';
 
 export default function MobileNav() {
   const pathName = usePathname();
 
   return (
-    <div className="bg-background fixed bottom-0 box-border flex h-[60px] w-full items-center justify-between gap-4 border-t p-3 md:hidden">
-      {NAV_ITEMS.map((item) => (
-        <Button
-          variant="secondary"
-          key={item.id}
-          asChild
-          className={cn(
-            'hover:bg-header hover:text-background',
-            getIsActivePathname({
-              pathName,
-              to: item.to,
-            }) && 'bg-header text-background',
-          )}
-        >
-          <Link href={`${NAV_BASE}${item.to}`}>
-            <div className="mobsm:px-0 mobsm:gap-2 flex flex-row items-center justify-between gap-1 px-3 text-xl">
+    <div className="bg-background fixed bottom-0 w-full border-0 md:hidden">
+      <div className="bg-header mx-4 mb-2 flex items-center justify-between gap-4 rounded-3xl px-4 py-2">
+        {MOBILE_NAV_ITEMS.map((item) => (
+          <Link
+            key={item.id}
+            href={`${NAV_BASE}${item.to}`}
+            className={cn(
+              'text-background dark:text-foreground rounded-full px-3 py-2 hover:bg-blue-400/25 hover:!text-blue-300',
+              getIsActivePathname({
+                pathName,
+                to: item.to,
+              }) && 'bg-blue-400/25 !text-blue-300',
+            )}
+          >
+            <div className="flex flex-col items-center justify-between">
               {!!item.icon && <item.icon className="size-5" />}
 
-              <div className="mobsm:block hidden">{item.title}</div>
+              <div className="mobsm:block hidden text-sm">{item.title}</div>
             </div>
           </Link>
-        </Button>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }

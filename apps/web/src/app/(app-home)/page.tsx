@@ -1,29 +1,71 @@
-import LoginLink from '@/src/components/home/login-link';
-import { Metadata } from 'next';
+import { type Metadata } from 'next';
+import { defineQuery } from 'next-sanity';
+import ExperienceSection from '@/src/components/home/experience-section';
+import EducationSection from '@/src/components/home/education-section';
+import ContactSection from '@/src/components/home/contact-section';
+import InfoSection from '@/src/components/home/info-section';
+import AboutSection from '@/src/components/home/about-section';
+import { client } from '@/src/lib/sanity/client';
+
+export const dynamic = 'force-static';
 
 export const metadata: Metadata = {
-  title: 'Home',
-  description:
-    'This is example of monorepo project. Created using Turborepo build system',
+  title: 'Home Page',
+  description: 'Created by Yevhenii Bober, Software Developer',
 };
 
-export default function Home() {
+const getHomePageQuery = defineQuery(`*[_type=="homePage"][0]{
+  ...,
+  infoSection{
+    username,
+    linkedinLink,
+    jobTitle,
+    location,
+    status,
+    description,
+    experience[] {
+      name,
+      description,
+      "logo": logo.asset->url
+    },
+    "avatar": avatar.asset->url,
+    "background": bgImage.asset->url
+  },
+  aboutSection {
+  slug,
+   descriptionLeft,
+    descriptionRight,
+    "technologies": technologies[].asset->url
+  },
+  experienceSection {
+    slug,
+    "companies": companies[].asset->url,
+    projects[]->{
+      projectName,
+      projectDescription,
+      content
+    }
+  },
+  educationSection {
+    ...,
+    "logo": logo.asset->url,  
+  }
+}`);
+
+export default async function Home() {
+  const data = await client.fetch(getHomePageQuery);
+
   return (
-    <main className="w-full space-y-3">
-      <div className="h-[208px] w-full bg-gradient-to-b from-[var(--header)] to-[var(--background)]" />
+    <>
+      <InfoSection data={data?.infoSection} />
 
-      <div className="flex flex-col items-center justify-between gap-2 px-4 md:px-6">
-        <h1 className="max-w-[775px] text-center text-[36px]/[110%] font-semibold text-zinc-400 md:text-[64px]/[120%] dark:text-zinc-200">
-          Welcome, this is example of monorepo project. Created using Turborepo
-          build system
-        </h1>
+      <AboutSection data={data?.aboutSection} />
 
-        <div className="mt-4 text-base font-semibold text-zinc-400 dark:text-zinc-200">
-          Go to Dashboard
-        </div>
+      <ExperienceSection data={data?.experienceSection} />
 
-        <LoginLink />
-      </div>
-    </main>
+      <EducationSection data={data?.educationSection} />
+
+      <ContactSection data={data?.contactSection} />
+    </>
   );
 }

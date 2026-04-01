@@ -12,6 +12,8 @@
  * ---------------------------------------------------------------------------------
  */
 
+export declare const internalGroqTypeReferenceTo: unique symbol;
+
 // Source: schema.json
 export type CatImageReference = {
   _ref: string;
@@ -211,24 +213,10 @@ export type ProjectInfo = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  slug?: Slug;
   projectName?: string;
-  link?: string;
   projectDescription?: string;
-  projectLogo?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: 'image';
-  };
-  techs?: Array<string>;
-};
-
-export type ProjectInfoReference = {
-  _ref: string;
-  _type: 'reference';
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: 'projectInfo';
+  content?: Array<string>;
 };
 
 export type DashboardPage = {
@@ -248,11 +236,13 @@ export type DashboardPage = {
   subText?: string;
   detailInfo?: Array<string>;
   cardsTitle?: string;
-  cards?: Array<
-    {
-      _key: string;
-    } & ProjectInfoReference
-  >;
+};
+
+export type ProjectInfoReference = {
+  _ref: string;
+  _type: 'reference';
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: 'projectInfo';
 };
 
 export type HomePage = {
@@ -261,7 +251,148 @@ export type HomePage = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  welcomeText?: string;
+  infoSection?: {
+    slug?: Slug;
+    linkedinLink?: string;
+    avatar?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: 'image';
+    };
+    bgImage?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: 'image';
+    };
+    username?: string;
+    jobTitle?: string;
+    location?: string;
+    status?: string;
+    description?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: 'span';
+        _key: string;
+      }>;
+      style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote';
+      listItem?: 'bullet' | 'number';
+      markDefs?: Array<{
+        href?: string;
+        _type: 'link';
+        _key: string;
+      }>;
+      level?: number;
+      _type: 'block';
+      _key: string;
+    }>;
+    experience?: Array<{
+      slug?: Slug;
+      name?: string;
+      description?: string;
+      logo?: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: 'image';
+      };
+      _type: 'job';
+      _key: string;
+    }>;
+  };
+  aboutSection?: {
+    slug?: Slug;
+    descriptionLeft?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: 'span';
+        _key: string;
+      }>;
+      style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote';
+      listItem?: 'bullet' | 'number';
+      markDefs?: Array<{
+        href?: string;
+        _type: 'link';
+        _key: string;
+      }>;
+      level?: number;
+      _type: 'block';
+      _key: string;
+    }>;
+    descriptionRight?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: 'span';
+        _key: string;
+      }>;
+      style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote';
+      listItem?: 'bullet' | 'number';
+      markDefs?: Array<{
+        href?: string;
+        _type: 'link';
+        _key: string;
+      }>;
+      level?: number;
+      _type: 'block';
+      _key: string;
+    }>;
+    technologies?: Array<{
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: 'image';
+      _key: string;
+    }>;
+  };
+  experienceSection?: {
+    slug?: Slug;
+    projects?: Array<
+      {
+        _key: string;
+      } & ProjectInfoReference
+    >;
+    companies?: Array<{
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: 'image';
+      _key: string;
+    }>;
+  };
+  educationSection?: {
+    slug?: Slug;
+    link?: string;
+    logo?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: 'image';
+    };
+    h3?: string;
+    details?: string;
+    summary?: string;
+  };
+  contactSection?: {
+    slug?: Slug;
+    mainText?: string;
+    additionalText?: string;
+    locationText?: string;
+    phoneNumber?: string;
+    email?: string;
+    linkedinLink?: string;
+    githubLink?: string;
+    telegramLink?: string;
+  };
 };
 
 export type SanityImagePaletteSwatch = {
@@ -378,8 +509,8 @@ export type AllSanitySchemaTypes =
   | CardsPage
   | CardInfo
   | ProjectInfo
-  | ProjectInfoReference
   | DashboardPage
+  | ProjectInfoReference
   | HomePage
   | SanityImagePaletteSwatch
   | SanityImagePalette
@@ -390,33 +521,7 @@ export type AllSanitySchemaTypes =
   | SanityImageAsset
   | Geopoint;
 
-export declare const internalGroqTypeReferenceTo: unique symbol;
-
-// Source: ../web/src/app/(app-home)/about/page.tsx
-// Variable: getAboutPageContent
-// Query: *[_type=="aboutPage"][0]{content}
-export type GetAboutPageContentResult = {
-  content: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: 'span';
-      _key: string;
-    }>;
-    style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal';
-    listItem?: 'bullet' | 'number';
-    markDefs?: Array<{
-      href?: string;
-      _type: 'link';
-      _key: string;
-    }>;
-    level?: number;
-    _type: 'block';
-    _key: string;
-  }> | null;
-} | null;
-
-// Source: ../web/src/app/(app-home)/contact/page.tsx
+// Source: ../web/src/app/(app-home)/(public-info)/contact-us/page.tsx
 // Variable: contactPageQuery
 // Query: *[_type=="contactPage"][0]{content}
 export type ContactPageQueryResult = {
@@ -440,22 +545,260 @@ export type ContactPageQueryResult = {
   }> | null;
 } | null;
 
-// Source: ../web/src/app/(app-home)/gallery/page.tsx
-// Variable: getGalleryPageQuery
-// Query: *[_type=="galleryPage"][0]{  title,  catImages[]->{    "url": image.asset->url  }}
-export type GetGalleryPageQueryResult = {
-  title: string | null;
-  catImages: Array<{
-    url: string | null;
+// Source: ../web/src/app/(app-home)/(public-info)/terms/page.tsx
+// Variable: getAboutPageContent
+// Query: *[_type=="aboutPage"][0]{content}
+export type GetAboutPageContentResult = {
+  content: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: 'span';
+      _key: string;
+    }>;
+    style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal';
+    listItem?: 'bullet' | 'number';
+    markDefs?: Array<{
+      href?: string;
+      _type: 'link';
+      _key: string;
+    }>;
+    level?: number;
+    _type: 'block';
+    _key: string;
   }> | null;
 } | null;
 
-// Source: ../web/src/app/(app-home)/gallery/page.tsx
-// Variable: getGalleryCatImagesCountQuery
-// Query: count(*[_type=="galleryPage"][0].catImages)
-export type GetGalleryCatImagesCountQueryResult = number | null;
+// Source: ../web/src/app/(app-home)/about/page.tsx
+// Variable: getAboutPageQuery
+// Query: *[_type=="homePage"][0]{   infoSection {    username,    linkedinLink,    jobTitle,    location,    status,    description,    experience[] {      name,      description,      "logo": logo.asset->url    },    "avatar": avatar.asset->url,    "background": bgImage.asset->url  },  aboutSection {    slug,    descriptionLeft,    descriptionRight,    "technologies": technologies[].asset->url  }}
+export type GetAboutPageQueryResult = {
+  infoSection: {
+    username: string | null;
+    linkedinLink: string | null;
+    jobTitle: string | null;
+    location: string | null;
+    status: string | null;
+    description: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: 'span';
+        _key: string;
+      }>;
+      style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal';
+      listItem?: 'bullet' | 'number';
+      markDefs?: Array<{
+        href?: string;
+        _type: 'link';
+        _key: string;
+      }>;
+      level?: number;
+      _type: 'block';
+      _key: string;
+    }> | null;
+    experience: Array<{
+      name: string | null;
+      description: string | null;
+      logo: string | null;
+    }> | null;
+    avatar: string | null;
+    background: string | null;
+  } | null;
+  aboutSection: {
+    slug: Slug | null;
+    descriptionLeft: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: 'span';
+        _key: string;
+      }>;
+      style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal';
+      listItem?: 'bullet' | 'number';
+      markDefs?: Array<{
+        href?: string;
+        _type: 'link';
+        _key: string;
+      }>;
+      level?: number;
+      _type: 'block';
+      _key: string;
+    }> | null;
+    descriptionRight: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: 'span';
+        _key: string;
+      }>;
+      style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal';
+      listItem?: 'bullet' | 'number';
+      markDefs?: Array<{
+        href?: string;
+        _type: 'link';
+        _key: string;
+      }>;
+      level?: number;
+      _type: 'block';
+      _key: string;
+    }> | null;
+    technologies: Array<string | null> | null;
+  } | null;
+} | null;
 
-// Source: ../web/src/app/dashboard/cards/[cardSlug]/page.tsx
+// Source: ../web/src/app/(app-home)/contact/page.tsx
+// Variable: getContactPageQuery
+// Query: *[_type=="homePage"][0]{   contactSection {    ...  },}
+export type GetContactPageQueryResult = {
+  contactSection: {
+    slug?: Slug;
+    mainText?: string;
+    additionalText?: string;
+    locationText?: string;
+    phoneNumber?: string;
+    email?: string;
+    linkedinLink?: string;
+    githubLink?: string;
+    telegramLink?: string;
+  } | null;
+} | null;
+
+// Source: ../web/src/app/(app-home)/experience/page.tsx
+// Variable: getExperiencePageQuery
+// Query: *[_type=="homePage"][0]{   experienceSection {    slug,    "companies": companies[].asset->url,    projects[]->{      projectName,      projectDescription,      content    }  },  educationSection {    ...,    "logo": logo.asset->url,    }}
+export type GetExperiencePageQueryResult = {
+  experienceSection: {
+    slug: Slug | null;
+    companies: Array<string | null> | null;
+    projects: Array<{
+      projectName: string | null;
+      projectDescription: string | null;
+      content: Array<string> | null;
+    }> | null;
+  } | null;
+  educationSection: {
+    slug?: Slug;
+    link?: string;
+    logo: string | null;
+    h3?: string;
+    details?: string;
+    summary?: string;
+  } | null;
+} | null;
+
+// Source: ../web/src/app/(app-home)/page.tsx
+// Variable: getHomePageQuery
+// Query: *[_type=="homePage"][0]{  ...,  infoSection{    username,    linkedinLink,    jobTitle,    location,    status,    description,    experience[] {      name,      description,      "logo": logo.asset->url    },    "avatar": avatar.asset->url,    "background": bgImage.asset->url  },  aboutSection {  slug,   descriptionLeft,    descriptionRight,    "technologies": technologies[].asset->url  },  experienceSection {    slug,    "companies": companies[].asset->url,    projects[]->{      projectName,      projectDescription,      content    }  },  educationSection {    ...,    "logo": logo.asset->url,    }}
+export type GetHomePageQueryResult = {
+  _id: string;
+  _type: 'homePage';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  infoSection: {
+    username: string | null;
+    linkedinLink: string | null;
+    jobTitle: string | null;
+    location: string | null;
+    status: string | null;
+    description: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: 'span';
+        _key: string;
+      }>;
+      style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal';
+      listItem?: 'bullet' | 'number';
+      markDefs?: Array<{
+        href?: string;
+        _type: 'link';
+        _key: string;
+      }>;
+      level?: number;
+      _type: 'block';
+      _key: string;
+    }> | null;
+    experience: Array<{
+      name: string | null;
+      description: string | null;
+      logo: string | null;
+    }> | null;
+    avatar: string | null;
+    background: string | null;
+  } | null;
+  aboutSection: {
+    slug: Slug | null;
+    descriptionLeft: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: 'span';
+        _key: string;
+      }>;
+      style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal';
+      listItem?: 'bullet' | 'number';
+      markDefs?: Array<{
+        href?: string;
+        _type: 'link';
+        _key: string;
+      }>;
+      level?: number;
+      _type: 'block';
+      _key: string;
+    }> | null;
+    descriptionRight: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: 'span';
+        _key: string;
+      }>;
+      style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal';
+      listItem?: 'bullet' | 'number';
+      markDefs?: Array<{
+        href?: string;
+        _type: 'link';
+        _key: string;
+      }>;
+      level?: number;
+      _type: 'block';
+      _key: string;
+    }> | null;
+    technologies: Array<string | null> | null;
+  } | null;
+  experienceSection: {
+    slug: Slug | null;
+    companies: Array<string | null> | null;
+    projects: Array<{
+      projectName: string | null;
+      projectDescription: string | null;
+      content: Array<string> | null;
+    }> | null;
+  } | null;
+  educationSection: {
+    slug?: Slug;
+    link?: string;
+    logo: string | null;
+    h3?: string;
+    details?: string;
+    summary?: string;
+  } | null;
+  contactSection?: {
+    slug?: Slug;
+    mainText?: string;
+    additionalText?: string;
+    locationText?: string;
+    phoneNumber?: string;
+    email?: string;
+    linkedinLink?: string;
+    githubLink?: string;
+    telegramLink?: string;
+  };
+} | null;
+
+// Source: ../web/src/app/dashboard/courses/[slug]/page.tsx
 // Variable: getCardPageQuery
 // Query: *[_type == "cardInfo" && slug.current == $cardSlug][0]{   name,   shortDescription,   amount,   rating,}
 export type GetCardPageQueryResult = {
@@ -465,7 +808,7 @@ export type GetCardPageQueryResult = {
   rating: number | null;
 } | null;
 
-// Source: ../web/src/app/dashboard/cards/page.tsx
+// Source: ../web/src/app/dashboard/courses/page.tsx
 // Variable: getCardsPageDataQuery
 // Query: *[_type=="cardsPage"][0]{ h1, subText, "infoCards": infoCards[]->{   name,   shortDescription,   amount,   rating,   "slug": slug.current, }}
 export type GetCardsPageDataQueryResult = {
@@ -480,36 +823,12 @@ export type GetCardsPageDataQueryResult = {
   }> | null;
 } | null;
 
-// Source: ../web/src/app/dashboard/table/page.tsx
+// Source: ../web/src/app/dashboard/events/page.tsx
 // Variable: totalCountQuery
 // Query: count(*[    _type == "customEvent" &&    (      $search == "*" ||      name match $search + "*" ||      description match $search + "*"    )  ])
 export type TotalCountQueryResult = number;
 
-// Source: ../web/src/components/dashboard/dashboard-root/info-section.tsx
-// Variable: getInfoSectionQuery
-// Query: *[_type=="dashboardPage"][0]{  h1,  subText,  detailInfo,  "avatar":avatar.asset->url}
-export type GetInfoSectionQueryResult = {
-  h1: string | null;
-  subText: string | null;
-  detailInfo: Array<string> | null;
-  avatar: string | null;
-} | null;
-
-// Source: ../web/src/components/dashboard/dashboard-root/projects-section/project-section.tsx
-// Variable: getProjectsSectionQuery
-// Query: *[_type=="dashboardPage"][0]{ cardsTitle, cards[]->{   projectName,   link,   projectDescription,   techs,   "logo":projectLogo.asset->url }}
-export type GetProjectsSectionQueryResult = {
-  cardsTitle: string | null;
-  cards: Array<{
-    projectName: string | null;
-    link: string | null;
-    projectDescription: string | null;
-    techs: Array<string> | null;
-    logo: string | null;
-  }> | null;
-} | null;
-
-// Source: ../web/src/components/dashboard/table/table.tsx
+// Source: ../web/src/components/dashboard/events-table/table.tsx
 // Variable: getCustomEventsQuery
 // Query: *[_type == "customEvent" &&    (      $search == "*" ||      name match $search + "*" ||      description match $search + "*"    )][$start...$end]{    "slug": slug.current,    name,    description,    startDate,    endDate,    categories,    status,    type,}
 export type GetCustomEventsQueryResult = Array<{
@@ -527,15 +846,15 @@ export type GetCustomEventsQueryResult = Array<{
 import '@sanity/client';
 declare module '@sanity/client' {
   interface SanityQueries {
-    '*[_type=="aboutPage"][0]{\ncontent\n}': GetAboutPageContentResult;
     '*[_type=="contactPage"][0]{\ncontent\n}': ContactPageQueryResult;
-    '*[_type=="galleryPage"][0]{\n  title,\n  catImages[]->{\n    "url": image.asset->url\n  }\n}': GetGalleryPageQueryResult;
-    'count(*[_type=="galleryPage"][0].catImages)': GetGalleryCatImagesCountQueryResult;
+    '*[_type=="aboutPage"][0]{\ncontent\n}': GetAboutPageContentResult;
+    '*[_type=="homePage"][0]{\n   infoSection {\n    username,\n    linkedinLink,\n    jobTitle,\n    location,\n    status,\n    description,\n    experience[] {\n      name,\n      description,\n      "logo": logo.asset->url\n    },\n    "avatar": avatar.asset->url,\n    "background": bgImage.asset->url\n  },\n  aboutSection {\n    slug,\n    descriptionLeft,\n    descriptionRight,\n    "technologies": technologies[].asset->url\n  }\n}': GetAboutPageQueryResult;
+    '*[_type=="homePage"][0]{\n   contactSection {\n    ...\n  },\n}': GetContactPageQueryResult;
+    '*[_type=="homePage"][0]{\n   experienceSection {\n    slug,\n    "companies": companies[].asset->url,\n    projects[]->{\n      projectName,\n      projectDescription,\n      content\n    }\n  },\n  educationSection {\n    ...,\n    "logo": logo.asset->url,  \n  }\n}': GetExperiencePageQueryResult;
+    '*[_type=="homePage"][0]{\n  ...,\n  infoSection{\n    username,\n    linkedinLink,\n    jobTitle,\n    location,\n    status,\n    description,\n    experience[] {\n      name,\n      description,\n      "logo": logo.asset->url\n    },\n    "avatar": avatar.asset->url,\n    "background": bgImage.asset->url\n  },\n  aboutSection {\n  slug,\n   descriptionLeft,\n    descriptionRight,\n    "technologies": technologies[].asset->url\n  },\n  experienceSection {\n    slug,\n    "companies": companies[].asset->url,\n    projects[]->{\n      projectName,\n      projectDescription,\n      content\n    }\n  },\n  educationSection {\n    ...,\n    "logo": logo.asset->url,  \n  }\n}': GetHomePageQueryResult;
     '*[_type == "cardInfo" && slug.current == $cardSlug][0]{\n   name,\n   shortDescription,\n   amount,\n   rating,\n}': GetCardPageQueryResult;
     '*[_type=="cardsPage"][0]{\n h1,\n subText,\n "infoCards": infoCards[]->{\n   name,\n   shortDescription,\n   amount,\n   rating,\n   "slug": slug.current,\n }\n}\n': GetCardsPageDataQueryResult;
     'count(*[\n    _type == "customEvent" &&\n    (\n      $search == "*" ||\n      name match $search + "*" ||\n      description match $search + "*"\n    )\n  ])': TotalCountQueryResult;
-    '*[_type=="dashboardPage"][0]{\n  h1,\n  subText,\n  detailInfo,\n  "avatar":avatar.asset->url\n}\n': GetInfoSectionQueryResult;
-    '*[_type=="dashboardPage"][0]{\n cardsTitle,\n cards[]->{\n   projectName,\n   link,\n   projectDescription,\n   techs,\n   "logo":projectLogo.asset->url\n }\n}': GetProjectsSectionQueryResult;
     '*[_type == "customEvent" &&\n    (\n      $search == "*" ||\n      name match $search + "*" ||\n      description match $search + "*"\n    )][$start...$end]{\n    "slug": slug.current,\n    name,\n    description,\n    startDate,\n    endDate,\n    categories,\n    status,\n    type,\n}\n': GetCustomEventsQueryResult;
   }
 }

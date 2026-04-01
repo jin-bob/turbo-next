@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import {
   Sidebar,
   SidebarContent,
@@ -12,7 +13,9 @@ export default function AppSidebar() {
   return (
     <Sidebar className="relative hidden md:fixed [[data-state=collapsed]>&]:!w-0">
       <SidebarHeader>
-        <Logo />
+        <Link className="flex items-center justify-center pt-2" href="/">
+          <Logo className="text-foreground [&>div]:border-foreground" />
+        </Link>
       </SidebarHeader>
 
       <SidebarContent>
