@@ -798,7 +798,7 @@ export type GetHomePageQueryResult = {
   };
 } | null;
 
-// Source: ../web/src/app/dashboard/cards/[slug]/page.tsx
+// Source: ../web/src/app/dashboard/courses/[slug]/page.tsx
 // Variable: getCardPageQuery
 // Query: *[_type == "cardInfo" && slug.current == $cardSlug][0]{   name,   shortDescription,   amount,   rating,}
 export type GetCardPageQueryResult = {
@@ -808,7 +808,7 @@ export type GetCardPageQueryResult = {
   rating: number | null;
 } | null;
 
-// Source: ../web/src/app/dashboard/cards/page.tsx
+// Source: ../web/src/app/dashboard/courses/page.tsx
 // Variable: getCardsPageDataQuery
 // Query: *[_type=="cardsPage"][0]{ h1, subText, "infoCards": infoCards[]->{   name,   shortDescription,   amount,   rating,   "slug": slug.current, }}
 export type GetCardsPageDataQueryResult = {
@@ -823,12 +823,12 @@ export type GetCardsPageDataQueryResult = {
   }> | null;
 } | null;
 
-// Source: ../web/src/app/dashboard/page.tsx
+// Source: ../web/src/app/dashboard/events/page.tsx
 // Variable: totalCountQuery
 // Query: count(*[    _type == "customEvent" &&    (      $search == "*" ||      name match $search + "*" ||      description match $search + "*"    )  ])
 export type TotalCountQueryResult = number;
 
-// Source: ../web/src/components/dashboard/events/events.tsx
+// Source: ../web/src/components/dashboard/events-table/table.tsx
 // Variable: getCustomEventsQuery
 // Query: *[_type == "customEvent" &&    (      $search == "*" ||      name match $search + "*" ||      description match $search + "*"    )][$start...$end]{    "slug": slug.current,    name,    description,    startDate,    endDate,    categories,    status,    type,}
 export type GetCustomEventsQueryResult = Array<{
@@ -844,7 +844,6 @@ export type GetCustomEventsQueryResult = Array<{
 
 // Query TypeMap
 import '@sanity/client';
-
 declare module '@sanity/client' {
   interface SanityQueries {
     '*[_type=="contactPage"][0]{\ncontent\n}': ContactPageQueryResult;
