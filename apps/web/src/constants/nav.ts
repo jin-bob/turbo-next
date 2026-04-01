@@ -13,14 +13,14 @@ export const NAV_ITEMS: Array<MenuItem> = [
   {
     id: '1',
     icon: Binoculars,
-    to: '/cards',
-    title: 'Cards',
+    to: '/courses',
+    title: 'Courses',
   },
   {
     id: '2',
     icon: Table,
-    to: '/table',
-    title: 'Table',
+    to: '/events',
+    title: 'Events',
   },
 ];
 

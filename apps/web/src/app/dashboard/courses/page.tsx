@@ -15,7 +15,7 @@ const getCardsPageDataQuery = defineQuery(`*[_type=="cardsPage"][0]{
 }
 `);
 
-export default async function CardsPage() {
+export default async function CoursePage() {
   const data = await client.fetch(getCardsPageDataQuery);
 
   return (

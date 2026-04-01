@@ -1,9 +1,9 @@
 import { defineQuery } from 'next-sanity';
-import TableUI from '@/src/components/dashboard/table/table-ui';
-import { COLUMNS } from '@/src/components/dashboard/table/columns';
+import TableUI from '@/src/components/global/tables/table-ui';
+import { COLUMNS } from '@/src/components/dashboard/events-table/columns';
 import { client } from '@/src/lib/sanity/client';
 import Search from '@/src/components/global/search';
-import Pagination from '@/src/components/dashboard/table/pagination';
+import Pagination from '@/src/components/global/tables/pagination';
 
 const getCustomEventsQuery = defineQuery(`*[_type == "customEvent" &&
     (
@@ -29,7 +29,7 @@ type TableProps = {
   search: string;
 };
 
-export default async function Table({
+export default async function EventsTable({
   start,
   end,
   search,

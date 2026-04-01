@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { type ReactNode } from 'react';
 import {
   flexRender,
   getCoreRowModel,
@@ -8,35 +8,55 @@ import {
   type TableOptions,
   useReactTable,
 } from '@tanstack/react-table';
-import getCommonPinningStyle from '@/src/components/dashboard/table/get-common-pinning-style';
+import getCommonPinningStyle from '@/src/components/global/tables/get-common-pinning-style';
 import {
   Table as ShadcnTable,
   TableBody,
-  TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from '@/src/components/ui/table';
+import createLoading from '@/src/components/global/tables/create-loading';
+import TableContent from '@/src/components/global/tables/table-content';
 
-type TableUIProps<TData extends RowData> = Omit<
+export type TableUIProps<TData extends RowData> = Omit<
   TableOptions<TData>,
   'getCoreRowModel'
 > & {
   className?: string;
+  isClient?: boolean;
+  isLoading?: boolean;
+  error?: ReactNode;
 };
 
 export default function TableUI<TData extends RowData>({
   data,
   columns,
   className,
+  isLoading,
+  isClient = false,
+  error,
   ...props
 }: TableUIProps<TData>) {
-  const memoData = useMemo(() => data, [data]);
-  const memoColumns = useMemo(() => columns, [columns]);
+  let tableData = data;
+  let tableColumns = columns;
+
+  if (isClient && isLoading !== undefined) {
+    const { columns: clientTableColumns, data: clientTableData } =
+      createLoading({
+        isLoading,
+        columns,
+        data,
+      });
+
+    console.log('aboba');
+    tableData = clientTableData;
+    tableColumns = clientTableColumns;
+  }
 
   const table = useReactTable({
-    data: memoData,
-    columns: memoColumns,
+    data: tableData,
+    columns: tableColumns,
     getCoreRowModel: getCoreRowModel(),
     ...props,
   });
@@ -74,32 +94,7 @@ export default function TableUI<TData extends RowData>({
       </TableHeader>
 
       <TableBody>
-        {table.getRowModel().rows.map((row) => {
-          return (
-            <TableRow
-              key={row.id}
-              data-state={row.getIsSelected() && 'selected'}
-              className={className}
-            >
-              {row.getVisibleCells().map((cell) => {
-                const isPinned = cell.column.getIsPinned();
-
-                return (
-                  <TableCell
-                    key={cell.id}
-                    style={getCommonPinningStyle(cell.column)}
-                    className="text-center"
-                  >
-                    {isPinned && (
-                      <div className="bg-background absolute inset-0 -z-[1]" />
-                    )}
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </TableCell>
-                );
-              })}
-            </TableRow>
-          );
-        })}
+        <TableContent table={table} error={error} className={className} />
       </TableBody>
     </ShadcnTable>
   );

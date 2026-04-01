@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   title: 'Cards',
 };
 
-export default async function CardPage(props: CardPageProps) {
+export default async function CoursePage(props: CardPageProps) {
   const params = await props.params;
 
   const data = await client.fetch(getCardPageQuery, {

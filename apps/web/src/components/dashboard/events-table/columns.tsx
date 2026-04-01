@@ -2,7 +2,7 @@
 
 import { createColumnHelper } from '@tanstack/react-table';
 import TruncateCell from '@/src/components/global/tables/cells/truncate-cell';
-import StatusCell from '@/src/components/dashboard/table/cells/status-cell';
+import StatusCell from '@/src/components/global/tables/cells/status-cell';
 import { getConvertedDate } from '@/src/helpers/getConvertedDate';
 import { GetCustomEventsQueryResult } from '@/src/schema';
 

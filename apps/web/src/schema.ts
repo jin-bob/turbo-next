@@ -798,7 +798,7 @@ export type GetHomePageQueryResult = {
   };
 } | null;
 
-// Source: ../web/src/app/dashboard/cards/[cardSlug]/page.tsx
+// Source: ../web/src/app/dashboard/cards/[slug]/page.tsx
 // Variable: getCardPageQuery
 // Query: *[_type == "cardInfo" && slug.current == $cardSlug][0]{   name,   shortDescription,   amount,   rating,}
 export type GetCardPageQueryResult = {
@@ -828,7 +828,7 @@ export type GetCardsPageDataQueryResult = {
 // Query: count(*[    _type == "customEvent" &&    (      $search == "*" ||      name match $search + "*" ||      description match $search + "*"    )  ])
 export type TotalCountQueryResult = number;
 
-// Source: ../web/src/components/dashboard/table/table.tsx
+// Source: ../web/src/components/dashboard/events/events.tsx
 // Variable: getCustomEventsQuery
 // Query: *[_type == "customEvent" &&    (      $search == "*" ||      name match $search + "*" ||      description match $search + "*"    )][$start...$end]{    "slug": slug.current,    name,    description,    startDate,    endDate,    categories,    status,    type,}
 export type GetCustomEventsQueryResult = Array<{
@@ -844,6 +844,7 @@ export type GetCustomEventsQueryResult = Array<{
 
 // Query TypeMap
 import '@sanity/client';
+
 declare module '@sanity/client' {
   interface SanityQueries {
     '*[_type=="contactPage"][0]{\ncontent\n}': ContactPageQueryResult;

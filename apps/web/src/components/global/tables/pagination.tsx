@@ -5,6 +5,7 @@ import { usePathname, useSearchParams } from 'next/navigation';
 
 type PaginationProps = {
   totalPages: number;
+  firstPage?: number;
 };
 
 export default function Pagination({ totalPages }: PaginationProps) {
