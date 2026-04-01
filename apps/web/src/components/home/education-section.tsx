@@ -25,7 +25,7 @@ export default function EducationSection({ data }: EducationSectionProps) {
         rel="noreferrer nofollow"
         className="block"
       >
-        <div className="bg-header relative isolate mb-16 flex w-full items-start gap-6 overflow-hidden rounded-[72px] p-6 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.18)] sm:p-12 md:gap-12">
+        <div className="bg-header relative isolate mb-16 flex w-full items-start gap-6 overflow-hidden rounded-4xl p-6 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.18)] sm:p-12 md:gap-12 md:rounded-[72px]">
           <div className="pointer-events-none absolute inset-0 z-0">
             <div className="absolute bottom-[-80px] left-[-140px] h-[220px] w-[420px] rotate-[-18deg] rounded-full bg-[linear-gradient(135deg,rgba(255,255,255,0.18),rgba(255,255,255,0.04))] shadow-[inset_0_0_40px_rgba(255,255,255,0.08)] blur-[2px]" />
 
