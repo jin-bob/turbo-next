@@ -828,6 +828,46 @@ export type GetCardsPageDataQueryResult = {
 // Query: count(*[    _type == "customEvent" &&    (      $search == "*" ||      name match $search + "*" ||      description match $search + "*"    )  ])
 export type TotalCountQueryResult = number;
 
+// Source: ../web/src/app/sitemap/route.ts
+// Variable: getHomePageMapQuery
+// Query: *[_type=="homePage"][0]{  _updatedAt,  "slug": _type}
+export type GetHomePageMapQueryResult = {
+  _updatedAt: string;
+  slug: 'homePage';
+} | null;
+
+// Source: ../web/src/app/sitemap/route.ts
+// Variable: getAboutPageMapQuery
+// Query: *[_type=="homePage"][0]{ _updatedAt,  "slug": aboutSection.slug.current}
+export type GetAboutPageMapQueryResult = {
+  _updatedAt: string;
+  slug: string | null;
+} | null;
+
+// Source: ../web/src/app/sitemap/route.ts
+// Variable: getContactPageMapQuery
+// Query: *[_type=="homePage"][0]{  _updatedAt,  "slug": contactSection.slug.current}
+export type GetContactPageMapQueryResult = {
+  _updatedAt: string;
+  slug: string | null;
+} | null;
+
+// Source: ../web/src/app/sitemap/route.ts
+// Variable: getTermsPageMapQuery
+// Query: *[_type=="aboutPage"][0]{ _updatedAt, "slug": slug.current}
+export type GetTermsPageMapQueryResult = {
+  _updatedAt: string;
+  slug: string | null;
+} | null;
+
+// Source: ../web/src/app/sitemap/route.ts
+// Variable: getContactUsPageMapQuery
+// Query: *[_type=="contactPage"][0]{ _updatedAt, "slug": slug.current}
+export type GetContactUsPageMapQueryResult = {
+  _updatedAt: string;
+  slug: string | null;
+} | null;
+
 // Source: ../web/src/components/dashboard/events-table/table.tsx
 // Variable: getCustomEventsQuery
 // Query: *[_type == "customEvent" &&    (      $search == "*" ||      name match $search + "*" ||      description match $search + "*"    )][$start...$end]{    "slug": slug.current,    name,    description,    startDate,    endDate,    categories,    status,    type,}
@@ -855,6 +895,11 @@ declare module '@sanity/client' {
     '*[_type == "cardInfo" && slug.current == $slug][0]{\n   name,\n   shortDescription,\n   amount,\n   rating,\n}': GetCardPageQueryResult;
     '*[_type=="cardsPage"][0]{\n h1,\n subText,\n "infoCards": infoCards[]->{\n   name,\n   shortDescription,\n   amount,\n   rating,\n   "slug": slug.current,\n }\n}\n': GetCardsPageDataQueryResult;
     'count(*[\n    _type == "customEvent" &&\n    (\n      $search == "*" ||\n      name match $search + "*" ||\n      description match $search + "*"\n    )\n  ])': TotalCountQueryResult;
+    '*[_type=="homePage"][0]{\n  _updatedAt,\n  "slug": _type\n}': GetHomePageMapQueryResult;
+    '*[_type=="homePage"][0]{\n _updatedAt,\n  "slug": aboutSection.slug.current\n}': GetAboutPageMapQueryResult;
+    '*[_type=="homePage"][0]{\n  _updatedAt,\n  "slug": contactSection.slug.current\n}': GetContactPageMapQueryResult;
+    '*[_type=="aboutPage"][0]{\n _updatedAt,\n "slug": slug.current\n}': GetTermsPageMapQueryResult;
+    '*[_type=="contactPage"][0]{\n _updatedAt,\n "slug": slug.current\n}': GetContactUsPageMapQueryResult;
     '*[_type == "customEvent" &&\n    (\n      $search == "*" ||\n      name match $search + "*" ||\n      description match $search + "*"\n    )][$start...$end]{\n    "slug": slug.current,\n    name,\n    description,\n    startDate,\n    endDate,\n    categories,\n    status,\n    type,\n}\n': GetCustomEventsQueryResult;
   }
 }
