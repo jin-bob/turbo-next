@@ -24,6 +24,7 @@ export default function Footer() {
 
             <div className="flex gap-5">
               <a
+                aria-label="Linkedin profile"
                 href="https://www.linkedin.com/in/mdbobskiy/"
                 target="_blank"
                 rel="noreferrer noopener"
@@ -32,6 +33,7 @@ export default function Footer() {
               </a>
 
               <a
+                aria-label="GitHub profile"
                 href="https://github.com/jin-bob"
                 target="_blank"
                 rel="noreferrer noopener"
@@ -40,6 +42,7 @@ export default function Footer() {
               </a>
 
               <a
+                aria-label="Telegram profile"
                 href="https://t.me/mdbobskiy"
                 target="_blank"
                 rel="noreferrer noopener"

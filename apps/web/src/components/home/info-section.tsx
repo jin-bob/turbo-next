@@ -63,12 +63,12 @@ export default function InfoSection({ data }: InfoSectionProps) {
                 {data?.status}
               </p>
 
-              <div className="text-foreground text-start text-2xl font-light">
+              <h2 className="text-foreground text-start text-2xl font-light">
                 <PortableText
                   value={data?.description ? data.description : []}
                   components={simpleComponent}
                 />
-              </div>
+              </h2>
             </div>
           </div>
 
