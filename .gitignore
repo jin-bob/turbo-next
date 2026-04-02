@@ -20,7 +20,7 @@ coverage
 
 # Vercel
 .vercel
-.gitignore
+.idea
 
 # Build Outputs
 .next/
