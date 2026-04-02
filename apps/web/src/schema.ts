@@ -800,7 +800,7 @@ export type GetHomePageQueryResult = {
 
 // Source: ../web/src/app/dashboard/courses/[slug]/page.tsx
 // Variable: getCardPageQuery
-// Query: *[_type == "cardInfo" && slug.current == $cardSlug][0]{   name,   shortDescription,   amount,   rating,}
+// Query: *[_type == "cardInfo" && slug.current == $slug][0]{   name,   shortDescription,   amount,   rating,}
 export type GetCardPageQueryResult = {
   name: string | null;
   shortDescription: string | null;
@@ -852,7 +852,7 @@ declare module '@sanity/client' {
     '*[_type=="homePage"][0]{\n   contactSection {\n    ...\n  },\n}': GetContactPageQueryResult;
     '*[_type=="homePage"][0]{\n   experienceSection {\n    slug,\n    "companies": companies[].asset->url,\n    projects[]->{\n      projectName,\n      projectDescription,\n      content\n    }\n  },\n  educationSection {\n    ...,\n    "logo": logo.asset->url,  \n  }\n}': GetExperiencePageQueryResult;
     '*[_type=="homePage"][0]{\n  ...,\n  infoSection{\n    username,\n    linkedinLink,\n    jobTitle,\n    location,\n    status,\n    description,\n    experience[] {\n      name,\n      description,\n      "logo": logo.asset->url\n    },\n    "avatar": avatar.asset->url,\n    "background": bgImage.asset->url\n  },\n  aboutSection {\n  slug,\n   descriptionLeft,\n    descriptionRight,\n    "technologies": technologies[].asset->url\n  },\n  experienceSection {\n    slug,\n    "companies": companies[].asset->url,\n    projects[]->{\n      projectName,\n      projectDescription,\n      content\n    }\n  },\n  educationSection {\n    ...,\n    "logo": logo.asset->url,  \n  }\n}': GetHomePageQueryResult;
-    '*[_type == "cardInfo" && slug.current == $cardSlug][0]{\n   name,\n   shortDescription,\n   amount,\n   rating,\n}': GetCardPageQueryResult;
+    '*[_type == "cardInfo" && slug.current == $slug][0]{\n   name,\n   shortDescription,\n   amount,\n   rating,\n}': GetCardPageQueryResult;
     '*[_type=="cardsPage"][0]{\n h1,\n subText,\n "infoCards": infoCards[]->{\n   name,\n   shortDescription,\n   amount,\n   rating,\n   "slug": slug.current,\n }\n}\n': GetCardsPageDataQueryResult;
     'count(*[\n    _type == "customEvent" &&\n    (\n      $search == "*" ||\n      name match $search + "*" ||\n      description match $search + "*"\n    )\n  ])': TotalCountQueryResult;
     '*[_type == "customEvent" &&\n    (\n      $search == "*" ||\n      name match $search + "*" ||\n      description match $search + "*"\n    )][$start...$end]{\n    "slug": slug.current,\n    name,\n    description,\n    startDate,\n    endDate,\n    categories,\n    status,\n    type,\n}\n': GetCustomEventsQueryResult;

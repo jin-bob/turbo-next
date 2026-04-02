@@ -16,7 +16,7 @@ export default function ListCard({
   rating,
   slug,
 }: ListCardData) {
-  const cardHref = `/dashboard/cards/${slug}`;
+  const cardHref = `/dashboard/courses/${slug}`;
 
   return (
     <Card className="xxs:w-[416px] bg-secondary flex h-full w-full flex-col rounded-[20px] border-0 p-4 shadow-none md:w-auto md:max-w-[345px]">

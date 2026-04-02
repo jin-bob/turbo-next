@@ -4,11 +4,11 @@ import { notFound } from 'next/navigation';
 import { client } from '@/src/lib/sanity/client';
 
 type CardPageProps = {
-  params?: Promise<{ cardSlug?: string }>;
+  params?: Promise<{ slug?: string }>;
 };
 
 const getCardPageQuery =
-  defineQuery(`*[_type == "cardInfo" && slug.current == $cardSlug][0]{
+  defineQuery(`*[_type == "cardInfo" && slug.current == $slug][0]{
    name,
    shortDescription,
    amount,
@@ -23,7 +23,7 @@ export default async function CoursePage(props: CardPageProps) {
   const params = await props.params;
 
   const data = await client.fetch(getCardPageQuery, {
-    cardSlug: params?.cardSlug,
+    slug: params?.slug,
   });
 
   if (!data) return notFound();
