@@ -1,5 +1,7 @@
 # Hi, this is simple Turborepo project.
 
+### (ON PROGRESS)
+
 This monorepo includes 2 projects:
 
 - Sanity studio
@@ -20,8 +22,9 @@ Implemented public / private route logic.
 
 Used TanStack Table for table with search.
 
+Used TanStack Query for client side data.
+
 Used portabletext for render rich text content.
 
-3 public pages (/about, /contant, /gallery) is static (SSG), but added webhook,
-that will trigger build if content of the relevant documents would change. 
+Landing pages are static, but added web-hook for rebuild if data is changed.
 
